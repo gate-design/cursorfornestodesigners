@@ -81,6 +81,12 @@ function PathBlock({ path, description }: { path: string; description?: string }
 // Chat Bubble Component for Personal Commentary
 function CommentaryBubble({ children, name = "You" }: { children: React.ReactNode; name?: string }) {
   const [imageError, setImageError] = React.useState(false)
+  // Use basePath for GitHub Pages compatibility
+  // Detect if we're in production (GitHub Pages) and use basePath accordingly
+  const basePath = typeof window !== 'undefined' && window.location.hostname.includes('github.io')
+    ? '/cursorfornestodesigners'
+    : ''
+  const avatarSrc = `${basePath}/avatar.png`
 
   return (
     <div className="flex gap-3">
@@ -88,7 +94,7 @@ function CommentaryBubble({ children, name = "You" }: { children: React.ReactNod
         {!imageError ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src="/avatar.png"
+            src={avatarSrc}
             alt={name}
             className="h-full w-full object-cover"
             onError={() => setImageError(true)}
@@ -170,7 +176,7 @@ export default function Page() {
           if (initFn) initFn()
         }
       } else {
-        window.UnicornStudio = { isInitialized: false }
+        window.UnicornStudio = { isInitialized: false, init: () => {} }
         const script = document.createElement("script")
         script.src =
           "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.5/dist/unicornStudio.umd.js"
@@ -403,7 +409,7 @@ export default function Page() {
                 </p>
               </div>
               <CommentaryBubble>
-                Make sure you have a token authorized for 'nestoca'. This is crucial for accessing our private packages.
+                Make sure you have a token authorized for &apos;nestoca&apos;. This is crucial for accessing our private packages.
               </CommentaryBubble>
             </Step>
 
@@ -424,7 +430,7 @@ export default function Page() {
                 </div>
               </div>
               <CommentaryBubble>
-                After checking 'read:packages', don't forget to update the token. This ensures the changes take effect immediately.
+                After checking &apos;read:packages&apos;, don&apos;t forget to update the token. This ensures the changes take effect immediately.
               </CommentaryBubble>
             </Step>
           </Section>
@@ -439,7 +445,7 @@ export default function Page() {
           >
             <Step number={1} title="Download Project Starter">
               <p className="text-sm text-muted-foreground">
-                Download the 'Project Starter' folder and place it in your computer's home folder.
+                Download the &apos;Project Starter&apos; folder and place it in your computer&apos;s home folder.
               </p>
               <div className="space-y-2">
                 <a
@@ -465,12 +471,18 @@ export default function Page() {
                   rel="noopener noreferrer"
                   className="font-medium text-primary hover:underline"
                 >
-                  'fe-shared-master'
+                  &apos;fe-shared-master&apos;
                 </a>{' '}
-                and also place it in your computer's home folder.
+                and also place it in your computer&apos;s home folder.
               </p>
+              <div className="mt-3 rounded-lg border border-blue-200 bg-blue-50 p-4">
+                <p className="text-sm font-medium text-blue-900">💡 Helpful Tip</p>
+                <p className="mt-1 text-sm text-blue-800">
+                  To download the repository: Click the green &apos;Code&apos; button on the GitHub page, then select &apos;Download ZIP&apos;. Extract the ZIP file and rename the extracted folder to &apos;fe-shared-master&apos;.
+                </p>
+              </div>
               <CommentaryBubble>
-                This is our shared component library. Having it in the home folder makes it easy to reference across different projects. You can clone it from the GitHub repository linked above.
+                This is our shared component library. Having it in the home folder makes it easy to reference across different projects.
               </CommentaryBubble>
             </Step>
           </Section>
@@ -485,7 +497,7 @@ export default function Page() {
           >
             <Step number={1} title="Open Project Starter in Cursor">
               <p className="text-sm text-muted-foreground">
-                Open Cursor and navigate to open the 'Project Starter' folder.
+                Open Cursor and navigate to open the &apos;Project Starter&apos; folder.
               </p>
               <PathBlock path="File → Open Folder → Select 'Project Starter'" />
             </Step>
@@ -517,7 +529,7 @@ export default function Page() {
                 </div>
               </div>
               <CommentaryBubble>
-                Having all these features enabled gives you the full power of Cursor's AI capabilities. The Agents feature is particularly powerful for complex tasks!
+                Having all these features enabled gives you the full power of Cursor&apos;s AI capabilities. The Agents feature is particularly powerful for complex tasks!
               </CommentaryBubble>
             </Step>
           </Section>
@@ -539,13 +551,13 @@ export default function Page() {
                   rel="noopener noreferrer"
                   className="font-medium text-primary hover:underline"
                 >
-                  'fe-shared-master'
+                  &apos;fe-shared-master&apos;
                 </a>{' '}
                 folder to your workspace.
               </p>
               <PathBlock path="File → Add Folder to Workspace → Select 'fe-shared-master' from root" />
               <CommentaryBubble>
-                This allows you to easily navigate between your project and the shared library components. Very handy when you need to check how a component is implemented! Make sure you've cloned the repository from GitHub first.
+                This allows you to easily navigate between your project and the shared library components. Very handy when you need to check how a component is implemented! Make sure you&apos;ve cloned the repository from GitHub first.
               </CommentaryBubble>
             </Step>
 
@@ -619,11 +631,11 @@ export default function Page() {
 
             <Step number={4} title="Build UI Package">
               <p className="text-sm text-muted-foreground">
-                Build the design system package so it's ready to use.
+                Build the design system package so it&apos;s ready to use.
               </p>
               <CommandBlock command="yarn build:design" description="Builds the UI component library" />
               <CommentaryBubble>
-                This compiles all the components and makes them available for import in your projects. You'll need to run this whenever the library is updated.
+                This compiles all the components and makes them available for import in your projects. You&apos;ll need to run this whenever the library is updated.
               </CommentaryBubble>
             </Step>
           </Section>
@@ -643,7 +655,7 @@ export default function Page() {
               <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
                 <p className="text-sm font-medium">Ask Cursor:</p>
                 <p className="rounded bg-background p-3 font-mono text-sm italic">
-                  "Set up a React + TypeScript + Vite project from scratch."
+                  &quot;Set up a React + TypeScript + Vite project from scratch.&quot;
                 </p>
               </div>
               <CommentaryBubble>
@@ -671,7 +683,7 @@ export default function Page() {
               </p>
               <CommandBlock command="npm run dev" description="Starts the Vite development server" />
               <CommentaryBubble>
-                You should see "Welcome to React + TypeScript + Vite - Your project is ready to go!" in your browser. If you see this, you're all set! 🎉
+                You should see &quot;Welcome to React + TypeScript + Vite - Your project is ready to go!&quot; in your browser. If you see this, you&apos;re all set! 🎉
               </CommentaryBubble>
             </Step>
           </Section>
@@ -686,16 +698,16 @@ export default function Page() {
           >
             <Step number={1} title="Explore Available Components">
               <p className="text-sm text-muted-foreground">
-                First, familiarize yourself with what's available in the library.
+                First, familiarize yourself with what&apos;s available in the library.
               </p>
               <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
                 <p className="text-sm font-medium">Ask Cursor in Ask mode:</p>
                 <p className="rounded bg-background p-3 font-mono text-sm italic">
-                  "Can you describe which components, styles, fonts and icons can be leveraged or used in this project?"
+                  &quot;Can you describe which components, styles, fonts and icons can be leveraged or used in this project?&quot;
                 </p>
               </div>
               <CommentaryBubble>
-                This helps you understand what's already built and what you can use. No need to reinvent the wheel!
+                This helps you understand what&apos;s already built and what you can use. No need to reinvent the wheel!
               </CommentaryBubble>
             </Step>
 
@@ -706,11 +718,11 @@ export default function Page() {
               <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
                 <p className="text-sm font-medium">Ask Cursor:</p>
                 <p className="rounded bg-background p-3 font-mono text-sm italic">
-                  "What is the default styling of a primary button?"
+                  &quot;What is the default styling of a primary button?&quot;
                 </p>
               </div>
               <CommentaryBubble>
-                This confirms your setup is working and introduces you to Ask mode. It's great for quick questions!
+                This confirms your setup is working and introduces you to Ask mode. It&apos;s great for quick questions!
               </CommentaryBubble>
             </Step>
 
@@ -721,7 +733,7 @@ export default function Page() {
               <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
                 <p className="text-sm font-medium">Ask Cursor in Ask mode:</p>
                 <p className="rounded bg-background p-3 font-mono text-sm italic break-all">
-                  "Implement this design from Figma."<br />
+                  &quot;Implement this design from Figma.&quot;<br />
                   <span className="text-muted-foreground">
                     https://www.figma.com/design/RBTP1VHx1D0XRUetkabJXe/PIM---Product-Info-Management?node-id=9758-66352&m=dev
                   </span>
@@ -746,12 +758,12 @@ export default function Page() {
           <Section
             id="personal-setup"
             title="8. Personal Setup (Simpler Alternative)"
-            description="A simpler way to get started for personal projects and experimentation"
+            description="A simpler way to get started for personal projects and experimentation (it&apos;s how I built this site!)"
           >
             <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 mb-6">
               <p className="text-sm font-medium text-primary">🎨 For Your Own Projects</p>
               <p className="mt-2 text-sm text-muted-foreground">
-                This section is perfect if you want to experiment on your own or work on personal projects. It's much simpler and uses shadcn/ui, a popular open-source component library.
+                This section is perfect if you want to experiment on your own or work on personal projects. It&apos;s much simpler and uses shadcn/ui, a popular open-source component library.
               </p>
             </div>
 
@@ -777,7 +789,7 @@ export default function Page() {
 
             <Step number={2} title="Create Your Project">
               <p className="text-sm text-muted-foreground">
-                Click the 'Create Project' button on the shadcn/ui page.
+                Click the &apos;Create Project&apos; button on the shadcn/ui page.
               </p>
               <CommentaryBubble>
                 This will generate a command that sets up a Next.js project with all the components pre-configured. Pretty neat!
@@ -786,7 +798,7 @@ export default function Page() {
 
             <Step number={3} title="Copy the npm Command">
               <p className="text-sm text-muted-foreground">
-                Click on the 'npm' tab and copy the command that appears.
+                Click on the &apos;npm&apos; tab and copy the command that appears.
               </p>
               <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
                 <p className="text-sm font-medium">Example command (yours will be different):</p>
@@ -796,7 +808,7 @@ export default function Page() {
 
             <Step number={4} title="Run the Command in Cursor Terminal">
               <p className="text-sm text-muted-foreground">
-                Open Cursor's terminal and paste the command you copied.
+                Open Cursor&apos;s terminal and paste the command you copied.
               </p>
               <CommandBlock command="npx shadcn@latest init -d" description="Your actual command will be different based on your customization" />
               <CommentaryBubble>
@@ -811,7 +823,7 @@ export default function Page() {
               <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
                 <p className="text-sm font-medium">Ask Cursor:</p>
                 <p className="rounded bg-background p-3 font-mono text-sm italic">
-                  "Reproduce this screenshot" [attach your screenshot]
+                  &quot;Reproduce this screenshot&quot; [attach your screenshot]
                 </p>
               </div>
               <CommentaryBubble>
@@ -825,7 +837,7 @@ export default function Page() {
               </p>
               <CommandBlock command="cd [project-folder-name]" description="Replace with your actual project folder name" />
               <CommentaryBubble>
-                The folder name is usually something like 'my-app' or whatever you named it. You can see it in the terminal output or check your file explorer.
+                The folder name is usually something like &apos;my-app&apos; or whatever you named it. You can see it in the terminal output or check your file explorer.
               </CommentaryBubble>
             </Step>
 
@@ -842,7 +854,7 @@ export default function Page() {
               </p>
               <CommandBlock command="npm run dev" description="Starts the Next.js development server" />
               <CommentaryBubble>
-                Now you can have fun! Experiment, try different things, and see what you can create. The development server will automatically reload when you make changes. Cursor will automatically provide you with a preview in the app. Before doing so, it will also provide you with a link like 'http://localhost:3000' which you can open in your browser.
+                Now you can have fun! Experiment, try different things, and see what you can create. The development server will automatically reload when you make changes. Cursor will automatically provide you with a preview in the app. Before doing so, it will also provide you with a link like &apos;http://localhost:3000&apos; which you can open in your browser.
               </CommentaryBubble>
             </Step>
           </Section>
@@ -850,15 +862,20 @@ export default function Page() {
 
         {/* Footer */}
         <div className="mt-16 border-t pt-8">
+          <div className="mb-8 text-center text-sm text-muted-foreground">
+            <p>Happy designing! 🎨</p>
+            <p className="mt-2">Questions? Reach out to the me on Slack!</p>
+          </div>
           <div className="mb-8 flex justify-center">
             <div
               data-us-project="l71XxmPotfcfVHJfkS76"
               style={{ width: "1440px", height: "900px", maxWidth: "100%" }}
             />
           </div>
-          <div className="text-center text-sm text-muted-foreground">
-            <p>Happy designing! 🎨</p>
-            <p className="mt-2">Questions? Reach out to the me on Slack!</p>
+          <div className="mt-6">
+            <CommentaryBubble>
+              You can try going on unicorn.studio, find any animation you like, click &apos;export &gt; embed&apos; and paste the code in Cursor to let it figure out the implementation!
+            </CommentaryBubble>
           </div>
         </div>
       </div>
