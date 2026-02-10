@@ -81,8 +81,7 @@ function PathBlock({ path, description }: { path: string; description?: string }
 // Chat Bubble Component for Personal Commentary
 function CommentaryBubble({ children, name = "You" }: { children: React.ReactNode; name?: string }) {
   const [imageError, setImageError] = React.useState(false)
-  // Use basePath for GitHub Pages compatibility
-  // Next.js with basePath configured automatically handles public assets
+  // With Next.js basePath, public assets are served from the basePath
   // The basePath is '/cursorfornestodesigners' as configured in next.config.ts
   const avatarSrc = '/cursorfornestodesigners/avatar.png'
 
