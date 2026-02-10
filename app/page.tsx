@@ -82,11 +82,9 @@ function PathBlock({ path, description }: { path: string; description?: string }
 function CommentaryBubble({ children, name = "You" }: { children: React.ReactNode; name?: string }) {
   const [imageError, setImageError] = React.useState(false)
   // Use basePath for GitHub Pages compatibility
-  // Detect if we're in production (GitHub Pages) and use basePath accordingly
-  const basePath = typeof window !== 'undefined' && window.location.hostname.includes('github.io')
-    ? '/cursorfornestodesigners'
-    : ''
-  const avatarSrc = `${basePath}/avatar.png`
+  // Next.js with basePath configured automatically handles public assets
+  // The basePath is '/cursorfornestodesigners' as configured in next.config.ts
+  const avatarSrc = '/cursorfornestodesigners/avatar.png'
 
   return (
     <div className="flex gap-3">
