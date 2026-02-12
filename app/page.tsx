@@ -446,7 +446,7 @@ export default function Page() {
               </p>
               <div className="space-y-2">
                 <a
-                  href="/project-starter.zip"
+                  href="/cursorfornestodesigners/project-starter.zip"
                   download
                   className="inline-flex items-center gap-2 rounded-lg border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
                 >
