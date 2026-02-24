@@ -64,20 +64,6 @@ function CommandBlock({ command, description }: { command: string; description?:
   )
 }
 
-// Path Block Component (for UI navigation paths without copy button)
-function PathBlock({ path, description }: { path: string; description?: string }) {
-  return (
-    <div className="space-y-1.5">
-      <div className="rounded-lg border bg-muted/50 p-3">
-        <code className="text-sm">{path}</code>
-      </div>
-      {description && (
-        <p className="text-xs text-muted-foreground">{description}</p>
-      )}
-    </div>
-  )
-}
-
 // Chat Bubble Component for Personal Commentary
 function CommentaryBubble({ children, name = "You" }: { children: React.ReactNode; name?: string }) {
   const [imageError, setImageError] = React.useState(false)
@@ -204,7 +190,7 @@ export default function Page() {
         <div className="mb-12 space-y-4 text-center">
           <h1 className="text-4xl font-bold">Cursor Guide for Designers</h1>
           <p className="text-lg text-muted-foreground">
-            Learn how to use Cursor to reproduce app screens with high fidelity using our front-end library
+            Create a custom design system and use it as the base for your projects
           </p>
         </div>
 
@@ -217,29 +203,11 @@ export default function Page() {
             <a href="#prerequisites" className="block text-sm text-primary hover:underline">
               Prerequisites
             </a>
-            <a href="#github-setup" className="block text-sm text-primary hover:underline">
-              1. GitHub Setup
+            <a href="#design-system" className="block text-sm text-primary hover:underline">
+              1. Create Your Design System &amp; Project
             </a>
-            <a href="#project-downloads" className="block text-sm text-primary hover:underline">
-              2. Project File Downloads
-            </a>
-            <a href="#cursor-setup" className="block text-sm text-primary hover:underline">
-              3. Cursor IDE Setup
-            </a>
-            <a href="#workspace-config" className="block text-sm text-primary hover:underline">
-              4. Workspace Configuration
-            </a>
-            <a href="#terminal-operations" className="block text-sm text-primary hover:underline">
-              5. Terminal Operations
-            </a>
-            <a href="#project-init" className="block text-sm text-primary hover:underline">
-              6. Project Initialization
-            </a>
-            <a href="#design-implementation" className="block text-sm text-primary hover:underline">
-              7. Design Implementation
-            </a>
-            <a href="#personal-setup" className="block text-sm text-primary hover:underline">
-              8. Personal Setup (Simpler Alternative)
+            <a href="#whats-next" className="block text-sm text-primary hover:underline">
+              What&apos;s next
             </a>
           </CardContent>
         </Card>
@@ -292,77 +260,10 @@ export default function Page() {
                     </div>
                   </div>
 
-                  {/* Yarn */}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg font-semibold">2. Yarn</span>
-                    </div>
-                    <div className="ml-6 space-y-2">
-                      <p className="text-sm text-muted-foreground">
-                        <strong>Version:</strong> Version &gt;= 1.19.1 (recommended: 1.22.18)
-                      </p>
-                      <ul className="ml-4 list-disc space-y-1 text-sm text-muted-foreground">
-                        <li>Install:</li>
-                      </ul>
-                      <div className="ml-4 mt-2 mb-2 space-y-3">
-                        <CommandBlock command="npm install -g yarn@1.22.18" />
-                        <CommentaryBubble>
-                          This command installs Yarn on your computer. The &quot;-g&quot; means it installs globally (available everywhere on your computer, not just in one folder). Copy the command, paste it in your terminal, press Enter, and wait for it to finish. You might see some text scrolling by - that&apos;s normal! It&apos;s downloading and setting things up.
-                        </CommentaryBubble>
-                      </div>
-                      <ul className="ml-4 list-disc space-y-1 text-sm text-muted-foreground">
-                        <li>Verify:</li>
-                      </ul>
-                      <div className="ml-4 mt-2 mb-2 space-y-3">
-                        <CommandBlock command="yarn --version" />
-                        <CommentaryBubble>
-                          After installing, use this to check if Yarn is ready to use. Copy, paste, Enter - just like before! If you see a version number, you&apos;re all set.
-                        </CommentaryBubble>
-                      </div>
-                      <ul className="ml-4 list-disc space-y-1 text-sm text-muted-foreground">
-                        <li>
-                          <strong>Note:</strong> The <code className="rounded bg-muted px-1.5 py-0.5 text-xs">fe-shared-master</code> monorepo requires Yarn (not npm)
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Git */}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg font-semibold">3. Git (if cloning from GitHub)</span>
-                    </div>
-                    <div className="ml-6 space-y-2">
-                      <CommentaryBubble>
-                        Git is a version control system - think of it like a time machine for your code! It lets you download code from GitHub (like our component library), track changes, and work with others. You&apos;ll need it to &quot;clone&quot; (download) the fe-shared repository from GitHub.
-                      </CommentaryBubble>
-                      <ul className="ml-4 list-disc space-y-1 text-sm text-muted-foreground">
-                        <li>
-                          Download from{' '}
-                          <a
-                            href="https://git-scm.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline"
-                          >
-                            git-scm.com
-                          </a>
-                        </li>
-                        <li>Verify:</li>
-                      </ul>
-                      <div className="ml-4 mt-2 space-y-3">
-                        <CommandBlock command="git --version" />
-                        <CommentaryBubble>
-                          Same routine: copy this command, paste it in your terminal, press Enter. If Git is installed, you&apos;ll see a version number. Easy peasy!
-                        </CommentaryBubble>
-                      </div>
-                    </div>
-                  </div>
-
                   {/* Cursor IDE */}
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-lg font-semibold">4. Cursor IDE</span>
+                      <span className="text-lg font-semibold">2. Cursor IDE</span>
                     </div>
                     <div className="ml-6 space-y-2">
                       <ul className="ml-4 list-disc space-y-1 text-sm text-muted-foreground">
@@ -387,121 +288,31 @@ export default function Page() {
 
           <Separator />
 
-          {/* Section 1: GitHub Setup */}
+          {/* Section 1: Create Your Design System & Project */}
           <Section
-            id="github-setup"
-            title="1. GitHub Setup"
-            description="Configure your GitHub token to access private packages"
+            id="design-system"
+            title="1. Create Your Design System &amp; Project"
+            description="Customize your design system with shadcn/ui and use it as the base for your projects (it&apos;s how I built this site!)"
           >
-            <Step number={1} title="Navigate to GitHub Settings">
-              <p className="text-sm text-muted-foreground">
-                Go to your GitHub profile settings to configure access tokens.
+            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 mb-6">
+              <p className="text-sm font-medium text-primary">🎨 Your Design System, Your Projects</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                You&apos;ll use shadcn/ui to define your own colors, fonts, and components. Then you create a project from that design system and use it as the base for everything you build.
               </p>
-              <div className="space-y-2">
-                <p className="text-sm font-medium">Path to follow:</p>
-                <p className="text-sm text-muted-foreground">
-                  <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-                    Github/Profile (upper right) → Settings → Developer Settings
-                  </code>
-                </p>
-              </div>
+            </div>
+
+            <Step number={1} title="Create a folder for your new project">
+              <p className="text-sm text-muted-foreground">
+                On your computer, create a new folder where you want your project to live (e.g. on your Desktop or in a dedicated projects folder). You&apos;ll open this folder in Cursor in the next step.
+              </p>
               <CommentaryBubble>
-                Make sure you have a token authorized for &apos;nestoca&apos;. This is crucial for accessing our private packages.
+                Giving your folder a clear name (e.g. &quot;my-design-app&quot;) keeps things organized. You can use Finder (Mac) or File Explorer (Windows) to create it.
               </CommentaryBubble>
             </Step>
 
-            <Step number={2} title="Configure Token Permissions">
+            <Step number={2} title="Open Cursor and Enable Cursor Features">
               <p className="text-sm text-muted-foreground">
-                Click on your existing token and ensure it has the correct permissions.
-              </p>
-              <div className="space-y-2">
-                <p className="text-sm font-medium">Required permission:</p>
-                <div className="flex items-center gap-2 rounded-lg border bg-muted/50 p-3">
-                  <input
-                    type="checkbox"
-                    checked
-                    readOnly
-                    className="h-4 w-4 rounded border-primary text-primary"
-                  />
-                  <label className="text-sm">read:packages</label>
-                </div>
-              </div>
-              <CommentaryBubble>
-                After checking &apos;read:packages&apos;, don&apos;t forget to update the token. This ensures the changes take effect immediately.
-              </CommentaryBubble>
-            </Step>
-          </Section>
-
-          <Separator />
-
-          {/* Section 2: Project Downloads */}
-          <Section
-            id="project-downloads"
-            title="2. Project File Downloads"
-            description="Download the necessary project files to your computer"
-          >
-            <Step number={1} title="Download Project Starter">
-              <p className="text-sm text-muted-foreground">
-                Download the &apos;Project Starter&apos; folder and place it in your computer&apos;s home folder.
-              </p>
-              <div className="space-y-2">
-                <a
-                  href="/cursorfornestodesigners/project-starter.zip"
-                  download
-                  className="inline-flex items-center gap-2 rounded-lg border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-                >
-                  Download Project Starter
-                  <span className="text-xs">↓</span>
-                </a>
-              </div>
-              <CommentaryBubble>
-                The home folder is typically <code className="rounded bg-muted px-1.5 py-0.5 text-xs">~/</code> on Mac/Linux or <code className="rounded bg-muted px-1.5 py-0.5 text-xs">C:\Users\YourUsername\</code> on Windows. This keeps everything organized and easy to find.
-              </CommentaryBubble>
-            </Step>
-
-            <Step number={2} title="Download Front-End Shared Library">
-              <p className="text-sm text-muted-foreground">
-                Download{' '}
-                <a
-                  href="https://github.com/nestoca/fe-shared"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-primary hover:underline"
-                >
-                  &apos;fe-shared-master&apos;
-                </a>{' '}
-                and also place it in your computer&apos;s home folder.
-              </p>
-              <div className="mt-3 rounded-lg border border-blue-200 bg-blue-50 p-4">
-                <p className="text-sm font-medium text-blue-900">💡 Helpful Tip</p>
-                <p className="mt-1 text-sm text-blue-800">
-                  To download the repository: Click the green &apos;Code&apos; button on the GitHub page, then select &apos;Download ZIP&apos;. Extract the ZIP file and rename the extracted folder to &apos;fe-shared-master&apos;.
-                </p>
-              </div>
-              <CommentaryBubble>
-                This is our shared component library. Having it in the home folder makes it easy to reference across different projects.
-              </CommentaryBubble>
-            </Step>
-          </Section>
-
-          <Separator />
-
-          {/* Section 3: Cursor Setup */}
-          <Section
-            id="cursor-setup"
-            title="3. Cursor IDE Setup"
-            description="Configure Cursor IDE for optimal workflow"
-          >
-            <Step number={1} title="Open Project Starter in Cursor">
-              <p className="text-sm text-muted-foreground">
-                Open Cursor and navigate to open the &apos;Project Starter&apos; folder.
-              </p>
-              <PathBlock path="File → Open Folder → Select 'Project Starter'" />
-            </Step>
-
-            <Step number={2} title="Enable Cursor Features">
-              <p className="text-sm text-muted-foreground">
-                Click the gear icon in the upper-right corner of the app and ensure all features are enabled.
+                Open Cursor and open the folder you created (File → Open Folder). Then click the gear icon in the upper-right corner and ensure all features are enabled.
               </p>
               <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
                 <div className="flex items-center gap-2">
@@ -529,242 +340,8 @@ export default function Page() {
                 Having all these features enabled gives you the full power of Cursor&apos;s AI capabilities. The Agents feature is particularly powerful for complex tasks!
               </CommentaryBubble>
             </Step>
-          </Section>
 
-          <Separator />
-
-          {/* Section 4: Workspace Configuration */}
-          <Section
-            id="workspace-config"
-            title="4. Workspace Configuration"
-            description="Set up your workspace with multiple folders"
-          >
-            <Step number={1} title="Add Front-End Library to Workspace">
-              <p className="text-sm text-muted-foreground">
-                Add the{' '}
-                <a
-                  href="https://github.com/nestoca/fe-shared"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-primary hover:underline"
-                >
-                  &apos;fe-shared-master&apos;
-                </a>{' '}
-                folder to your workspace.
-              </p>
-              <PathBlock path="File → Add Folder to Workspace → Select 'fe-shared-master' from root" />
-              <CommentaryBubble>
-                This allows you to easily navigate between your project and the shared library components. Very handy when you need to check how a component is implemented! Make sure you&apos;ve cloned the repository from GitHub first.
-              </CommentaryBubble>
-            </Step>
-
-            <Step number={2} title="Save Workspace (Optional)">
-              <p className="text-sm text-muted-foreground">
-                Optionally save your workspace configuration for future use.
-              </p>
-              <PathBlock path="File → Save Workspace as..." />
-            </Step>
-
-            <Step number={3} title="Verify Workspace Setup">
-              <p className="text-sm text-muted-foreground">
-                Confirm that both folders are visible in the Sidebar.
-              </p>
-              <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="text-muted-foreground">📁</span>
-                  <a
-                    href="#project-downloads"
-                    className="text-primary hover:underline"
-                  >
-                    Project Starter
-                  </a>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="text-muted-foreground">📁</span>
-                  <a
-                    href="https://github.com/nestoca/fe-shared"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    fe-shared-master
-                  </a>
-                </div>
-              </div>
-            </Step>
-          </Section>
-
-          <Separator />
-
-          {/* Section 5: Terminal Operations */}
-          <Section
-            id="terminal-operations"
-            title="5. Terminal Operations"
-            description="Install dependencies and build the front-end library"
-          >
-            <Step number={1} title="Open Terminal">
-              <p className="text-sm text-muted-foreground">
-                Make the Cursor Terminal visible.
-              </p>
-              <PathBlock path="View → Terminal" />
-            </Step>
-
-            <Step number={2} title="Navigate to Front-End Library">
-              <p className="text-sm text-muted-foreground">
-                Change directory to the front-end shared library.
-              </p>
-              <CommandBlock command="cd ../fe-shared-master" description="Moves from Project Starter to fe-shared-master" />
-            </Step>
-
-            <Step number={3} title="Install Dependencies">
-              <p className="text-sm text-muted-foreground">
-                Install all dependencies at the monorepo root.
-              </p>
-              <CommandBlock command="yarn install" description="Installs all package dependencies" />
-              <CommentaryBubble>
-                This might take a few minutes depending on your internet connection. Grab a coffee! ☕
-              </CommentaryBubble>
-            </Step>
-
-            <Step number={4} title="Build UI Package">
-              <p className="text-sm text-muted-foreground">
-                Build the design system package so it&apos;s ready to use.
-              </p>
-              <CommandBlock command="yarn build:design" description="Builds the UI component library" />
-              <CommentaryBubble>
-                This compiles all the components and makes them available for import in your projects. You&apos;ll need to run this whenever the library is updated.
-              </CommentaryBubble>
-            </Step>
-          </Section>
-
-          <Separator />
-
-          {/* Section 6: Project Initialization */}
-          <Section
-            id="project-init"
-            title="6. Project Initialization"
-            description="Set up your React + TypeScript + Vite project"
-          >
-            <Step number={1} title="Use Cursor Agent Mode">
-              <p className="text-sm text-muted-foreground">
-                Open Cursor chat in Agent mode and request project setup.
-              </p>
-              <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
-                <p className="text-sm font-medium">Ask Cursor:</p>
-                <p className="rounded bg-background p-3 font-mono text-sm italic">
-                  &quot;Set up a React + TypeScript + Vite project from scratch.&quot;
-                </p>
-              </div>
-              <CommentaryBubble>
-                Agent mode is powerful! It can create entire project structures for you. Just sit back and watch the magic happen.
-              </CommentaryBubble>
-            </Step>
-
-            <Step number={2} title="Navigate to Project Directory">
-              <p className="text-sm text-muted-foreground">
-                Move back to your project directory (adjust path if needed).
-              </p>
-              <CommandBlock command="cd ../NeueTemplate" description="Or whatever your project folder is named" />
-            </Step>
-
-            <Step number={3} title="Install Project Dependencies">
-              <p className="text-sm text-muted-foreground">
-                Install all remaining dependencies for your project.
-              </p>
-              <CommandBlock command="npm install" description="Installs project-specific dependencies" />
-            </Step>
-
-            <Step number={4} title="Start Development Server">
-              <p className="text-sm text-muted-foreground">
-                Launch the development server and verify everything works.
-              </p>
-              <CommandBlock command="npm run dev" description="Starts the Vite development server" />
-              <CommentaryBubble>
-                You should see &quot;Welcome to React + TypeScript + Vite - Your project is ready to go!&quot; in your browser. If you see this, you&apos;re all set! 🎉
-              </CommentaryBubble>
-            </Step>
-          </Section>
-
-          <Separator />
-
-          {/* Section 7: Design Implementation */}
-          <Section
-            id="design-implementation"
-            title="7. Design Implementation"
-            description="Reproduce Figma designs with high fidelity"
-          >
-            <Step number={1} title="Explore Available Components">
-              <p className="text-sm text-muted-foreground">
-                First, familiarize yourself with what&apos;s available in the library.
-              </p>
-              <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
-                <p className="text-sm font-medium">Ask Cursor in Ask mode:</p>
-                <p className="rounded bg-background p-3 font-mono text-sm italic">
-                  &quot;Can you describe which components, styles, fonts and icons can be leveraged or used in this project?&quot;
-                </p>
-              </div>
-              <CommentaryBubble>
-                This helps you understand what&apos;s already built and what you can use. No need to reinvent the wheel!
-              </CommentaryBubble>
-            </Step>
-
-            <Step number={2} title="Check Default Styling">
-              <p className="text-sm text-muted-foreground">
-                Verify the default styling of components.
-              </p>
-              <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
-                <p className="text-sm font-medium">Ask Cursor:</p>
-                <p className="rounded bg-background p-3 font-mono text-sm italic">
-                  &quot;What is the default styling of a primary button?&quot;
-                </p>
-              </div>
-              <CommentaryBubble>
-                This confirms your setup is working and introduces you to Ask mode. It&apos;s great for quick questions!
-              </CommentaryBubble>
-            </Step>
-
-            <Step number={3} title="Implement Figma Design">
-              <p className="text-sm text-muted-foreground">
-                Provide Cursor with a Figma design URL to implement.
-              </p>
-              <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
-                <p className="text-sm font-medium">Ask Cursor in Ask mode:</p>
-                <p className="rounded bg-background p-3 font-mono text-sm italic break-all">
-                  &quot;Implement this design from Figma.&quot;<br />
-                  <span className="text-muted-foreground">
-                    https://www.figma.com/design/RBTP1VHx1D0XRUetkabJXe/PIM---Product-Info-Management?node-id=9758-66352&m=dev
-                  </span>
-                </p>
-              </div>
-              <CommentaryBubble>
-                Cursor will analyze the Figma design and implement it using only components from your React library. The result should be a close match with no overrides needed!
-              </CommentaryBubble>
-            </Step>
-
-            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
-              <p className="text-sm font-medium text-primary">💡 Pro Tip</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                If you need to provide screenshots to make the experience easier to follow, let me know! I can add image placeholders or instructions for where to add them.
-              </p>
-            </div>
-          </Section>
-
-          <Separator />
-
-          {/* Section 8: Personal Setup (Simpler Alternative) */}
-          <Section
-            id="personal-setup"
-            title="8. Personal Setup (Simpler Alternative)"
-            description="A simpler way to get started for personal projects and experimentation (it&apos;s how I built this site!)"
-          >
-            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 mb-6">
-              <p className="text-sm font-medium text-primary">🎨 For Your Own Projects</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                This section is perfect if you want to experiment on your own or work on personal projects. It&apos;s much simpler and uses shadcn/ui, a popular open-source component library.
-              </p>
-            </div>
-
-            <Step number={1} title="Customize Your Design System">
+            <Step number={3} title="Customize Your Design System">
               <p className="text-sm text-muted-foreground">
                 Visit the shadcn/ui project creator and customize your design system.
               </p>
@@ -784,7 +361,7 @@ export default function Page() {
               </CommentaryBubble>
             </Step>
 
-            <Step number={2} title="Create Your Project">
+            <Step number={4} title="Create Your Project">
               <p className="text-sm text-muted-foreground">
                 Click the &apos;Create Project&apos; button on the shadcn/ui page.
               </p>
@@ -793,7 +370,7 @@ export default function Page() {
               </CommentaryBubble>
             </Step>
 
-            <Step number={3} title="Copy the npm Command">
+            <Step number={5} title="Copy the npm Command">
               <p className="text-sm text-muted-foreground">
                 Click on the &apos;npm&apos; tab and copy the command that appears.
               </p>
@@ -803,7 +380,7 @@ export default function Page() {
               </div>
             </Step>
 
-            <Step number={4} title="Run the Command in Cursor Terminal">
+            <Step number={6} title="Run the Command in Cursor Terminal">
               <p className="text-sm text-muted-foreground">
                 Open Cursor&apos;s terminal and paste the command you copied.
               </p>
@@ -813,24 +390,27 @@ export default function Page() {
               </CommentaryBubble>
             </Step>
 
-            <Step number={5} title="Ask Cursor to Reproduce a Screenshot">
+            <Step number={7} title="Ask Cursor to Build from a Screenshot or PRD">
               <p className="text-sm text-muted-foreground">
-                Provide Cursor with a screenshot you want to reproduce.
+                Provide Cursor with a screenshot you want to reproduce, or paste a PRD (product requirements document) of any length. You can finish your prompt with &quot;run dev&quot; so Cursor knows to run the app locally for you.
               </p>
               <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
-                <p className="text-sm font-medium">Ask Cursor:</p>
+                <p className="text-sm font-medium">Ask Cursor (examples):</p>
                 <p className="rounded bg-background p-3 font-mono text-sm italic">
-                  &quot;Reproduce this screenshot&quot; [attach your screenshot]
+                  &quot;Reproduce this screenshot. Run dev.&quot; [attach your screenshot]
+                </p>
+                <p className="rounded bg-background p-3 font-mono text-sm italic mt-2">
+                  &quot;Build this: [paste your PRD]. Run dev.&quot;
                 </p>
               </div>
               <CommentaryBubble>
-                You can use any screenshot - a design you like, a UI you saw online, or even something from Dribbble/Mobbin. Cursor will do its best to recreate it!
+                You can use any screenshot - a design you like, a UI you saw online, or even something from Dribbble/Mobbin. Or describe what you want in a PRD of any length. Adding &quot;run dev&quot; tells Cursor to start the app so you can preview it right away.
               </CommentaryBubble>
             </Step>
 
-            <Step number={6} title="Navigate to Project Folder">
+            <Step number={8} title="Navigate to Project Folder (optional)">
               <p className="text-sm text-muted-foreground">
-                Move into the folder where the project was created.
+                Only needed if you&apos;re doing Step 9: move into the folder where the project was created so you can run the dev server from the terminal.
               </p>
               <CommandBlock command="cd [project-folder-name]" description="Replace with your actual project folder name" />
               <CommentaryBubble>
@@ -838,22 +418,40 @@ export default function Page() {
               </CommentaryBubble>
             </Step>
 
-            <Step number={7} title="Install Dependencies">
+            <Step number={9} title="Start Development Server (if needed)">
               <p className="text-sm text-muted-foreground">
-                Install all the project dependencies.
+                If you didn&apos;t include &quot;run dev&quot; in your prompt at Step 7, open the terminal, go to your project folder, and start the development server yourself.
               </p>
-              <CommandBlock command="npm install" description="Installs all required packages" />
-            </Step>
-
-            <Step number={8} title="Start Development Server">
-              <p className="text-sm text-muted-foreground">
-                Launch the development server and start experimenting!
-              </p>
-              <CommandBlock command="npm run dev" description="Starts the Next.js development server" />
+              <CommandBlock command="cd [project-folder-name] && npm run dev" description="Navigate to your project folder, then start the dev server" />
               <CommentaryBubble>
                 Now you can have fun! Experiment, try different things, and see what you can create. The development server will automatically reload when you make changes. Cursor will automatically provide you with a preview in the app. Before doing so, it will also provide you with a link like &apos;http://localhost:3000&apos; which you can open in your browser.
               </CommentaryBubble>
             </Step>
+          </Section>
+
+          {/* What's next */}
+          <Section
+            id="whats-next"
+            title="What&apos;s next"
+            description="Where we&apos;re headed"
+          >
+            <div className="space-y-4 text-sm text-muted-foreground">
+              <p>
+                We&apos;re still exploring ways to share these prototypes outbound in a safe way. For now, think of them as your own little private sandboxes to play, test, and experiment.
+              </p>
+              <p>
+                Another thing I&apos;m trying to figure out is how to best incorporate our design system. As shared in the following LLM podcast —{' '}
+                <a
+                  href="https://nestomortgage.slack.com/files/U08CEVC2LLE/F0AFUF1Q7LP/why_ai_hates_your_custom_design_system.m4a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary hover:underline"
+                >
+                  why AI hates your custom design system
+                </a>
+                {' '} — it&apos;s proving harder than expected to leverage our Storybook design system. I&apos;ll be on the lookout for options to smoothen this part of the process. 🚀
+              </p>
+            </div>
           </Section>
         </div>
 
