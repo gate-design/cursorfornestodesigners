@@ -19,8 +19,8 @@ export type TemplateCardProps = {
 }
 
 /**
- * Starter profile card — duplicate this file as `YourNameCard.tsx` and customize.
- * Used in the Playground tab and referenced from the Git guide.
+ * Starter profile card — duplicate this file as `YourNameCard.tsx`, customize it,
+ * then register it in `designer-cards-registry.tsx` so it appears in the Playground gallery.
  */
 export function TemplateCard({
   name = "Your name",

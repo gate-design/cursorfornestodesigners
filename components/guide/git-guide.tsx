@@ -92,40 +92,47 @@ export function GitGuide() {
           title="Part 2: Setting the stage (one-time setup)"
           description="You only do these steps once — keep the friction low for yourself."
         >
-          <Step number={1} title="GitHub account &amp; permissions">
-            <p className="text-sm text-muted-foreground">
-              Make sure <em>you</em> have a GitHub account and that your lead has added you to the{" "}
-              <a
-                href="https://github.com/gate-design"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-primary hover:underline"
-              >
-                gate-design
-              </a>{" "}
-              organization with access to the playground repo{" "}
-              <a
-                href={PLAYGROUND_REPO_WEB}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-primary hover:underline"
-              >
-                cursorfornestodesigners
-              </a>
-              .
-            </p>
-          </Step>
+          <p className="text-sm text-muted-foreground">
+            You&apos;ll need a free GitHub account. Invites to this repo are sent by the team — accept the invitation (email or GitHub notification) when it arrives, then continue below.
+          </p>
 
-          <Step number={2} title="Authentication in Cursor">
+          <Step number={1} title="Sign in to GitHub from Cursor">
             <p className="text-sm text-muted-foreground">
-              Use Cursor&apos;s built-in <strong className="text-foreground">Sign in to GitHub</strong> flow. It&apos;s much easier for designers than managing SSH keys manually.
+              Cursor talks to GitHub for you when you clone, push, and open PRs. You activate that by signing in once — you don&apos;t need to paste SSH keys by hand.
+            </p>
+            <ol className="ml-4 list-decimal space-y-3 text-sm text-muted-foreground">
+              <li>
+                Open the <strong className="text-foreground">Command Palette</strong>:{" "}
+                <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">⌘</kbd>{" "}
+                + <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">Shift</kbd>{" "}
+                + <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">P</kbd> on Mac, or{" "}
+                <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">Ctrl</kbd>{" "}
+                + <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">Shift</kbd>{" "}
+                + <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">P</kbd> on Windows.
+              </li>
+              <li>
+                Type <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">GitHub</code> and pick the command that signs you in — often named something like{" "}
+                <strong className="text-foreground">GitHub: Sign in</strong> or <strong className="text-foreground">Sign in to GitHub</strong> (wording can vary slightly by Cursor version).
+              </li>
+              <li>
+                Your browser opens: log into GitHub if asked, then <strong className="text-foreground">Authorize</strong> Cursor. When the browser says you&apos;re done, return to Cursor — it should now be linked to your GitHub account.
+              </li>
+              <li>
+                <strong className="text-foreground">Alternative:</strong> click your <strong className="text-foreground">profile / account</strong> menu (often top-right in Cursor), open <strong className="text-foreground">Settings</strong> or <strong className="text-foreground">Cursor Settings</strong>, and look for GitHub or <strong className="text-foreground">Connect</strong> / <strong className="text-foreground">Sign in</strong> next to accounts — that launches the same kind of browser sign-in.
+              </li>
+            </ol>
+            <p className="text-sm text-muted-foreground">
+              After this works, the first time you <strong className="text-foreground">clone</strong> or <strong className="text-foreground">push</strong>, Cursor can use that login automatically instead of asking for cryptic keys.
             </p>
             <CommentaryBubble>
-              If you&apos;re ever asked for keys and tokens, ask for help — the built-in sign-in path is the one we want you on first.
+              If the palette doesn&apos;t list GitHub, update Cursor and try again — or ask for a quick screen share. If something asks for &quot;SSH&quot; or &quot;personal access token&quot; before you&apos;ve tried the sign-in flow, pause and get help; the browser sign-in is the path we want first.
             </CommentaryBubble>
+            <p className="text-sm text-muted-foreground">
+              <strong className="text-foreground">Nesto company repos:</strong> when you connect to repositories at work (Nesto&apos;s GitHub org, VPN, or internal auth), the exact sign-in and permission steps can differ from this playground — follow your team&apos;s instructions there; treat this section as the pattern, not a copy-paste for every repo.
+            </p>
           </Step>
 
-          <Step number={3} title="Cloning the playground">
+          <Step number={2} title="Cloning the playground">
             <p className="text-sm text-muted-foreground">
               These guides and the <strong className="text-foreground">Playground</strong> tab in this app all ship from the same repository — once you clone it, you&apos;re editing the code you&apos;ve been reading.
             </p>
@@ -166,13 +173,20 @@ export function GitGuide() {
           <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
             <p className="text-sm font-medium text-primary">Goal</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              You&apos;ll ship a small, visible change so the full loop feels real: sync, branch, code, commit, open a PR.
+              You&apos;ll ship a small, visible change so the full loop feels real: sync, branch, code, commit, open a PR — and when it merges, your card shows up in the <strong className="text-foreground">Playground</strong> gallery for everyone.
             </p>
           </div>
 
           <Step number={1} title="Syncing">
             <p className="text-sm text-muted-foreground">
-              Run <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">git pull</code> so you have everyone else&apos;s latest work before you branch.
+              Make sure the <strong className="text-foreground">bottom panel</strong> is visible so you can run commands in the <strong className="text-foreground">terminal</strong>. Toggle it with{" "}
+              <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">⌘</kbd>{" "}
+              + <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">J</kbd> on Mac (or{" "}
+              <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">Ctrl</kbd>{" "}
+              + <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">J</kbd> on Windows) — that shortcut shows or hides the panel where your Git commands run.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Then run <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">git pull</code> so you have everyone else&apos;s latest work before you branch.
             </p>
             <CommandBlock command="git pull" />
           </Step>
@@ -182,27 +196,55 @@ export function GitGuide() {
               Create a branch named <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">feature/yourname-card</code> (use your actual name).
             </p>
             <CommandBlock command="git checkout -b feature/yourname-card" description="Example — swap yourname for your name" />
+            <CommentaryBubble name="Personal note">
+              After you&apos;ve run that command, I&apos;d like you to open the{" "}
+              <strong className="font-medium text-foreground">Source Control</strong> tab in the sidebar (that&apos;s the version control / Git view). Look for the branching graph or branch list, depending on your Cursor version — you should see the branch you just created. As other designers add their own branches, and each time you run{" "}
+              <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">git pull</code> to pick up the latest from the remote, you&apos;ll see more branches show up here too — it&apos;s a simple way to watch everyone working in parallel.
+            </CommentaryBubble>
           </Step>
 
-          <Step number={3} title="The task">
+          <Step number={3} title="Build your card and put it on the Playground page">
             <p className="text-sm text-muted-foreground">
-              Go to <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">components/playground/</code> in your clone (same paths as this project).
+              Work in <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">components/playground/</code> in your clone (same paths as this project).
             </p>
-            <ul className="ml-4 list-disc space-y-1 text-sm text-muted-foreground">
-              <li>Duplicate <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">TemplateCard.tsx</code> and rename it to <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">YourNameCard.tsx</code>.</li>
+            <ol className="ml-4 list-decimal space-y-3 text-sm text-muted-foreground">
               <li>
-                Use Cursor (<kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">⌘</kbd>{" "}
-                + <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">K</kbd>) to customize the shadcn <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Badge</code>, <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Card</code>, and layout — and make the card feel like you. Use the <strong className="text-foreground">Playground</strong> tab in the running app as your preview.
+                <strong className="text-foreground">Duplicate the template.</strong> Copy{" "}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">TemplateCard.tsx</code> to a new file, e.g.{" "}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">YourNameCard.tsx</code>, and export your own component (e.g.{" "}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">export function YourNameCard()</code>
+                ).
               </li>
-            </ul>
+              <li>
+                <strong className="text-foreground">Customize it.</strong> Use Cursor (
+                <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">⌘</kbd>{" "}
+                + <kbd className="rounded border bg-muted px-1.5 py-0.5 font-mono text-xs">K</kbd>
+                ) to tweak the shadcn <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Badge</code>,{" "}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">Card</code>, copy, and layout. Refresh your local dev server to preview — your card isn&apos;t on the shared Playground page until the next step.
+              </li>
+              <li>
+                <strong className="text-foreground">Register it so everyone sees it.</strong> Open{" "}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">components/playground/designer-cards-registry.tsx</code>
+                . Import your component at the top, then add one entry to the{" "}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">DESIGNER_CARDS</code> array — for example{" "}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">
+                  {`{ id: "alex", label: "Alex", Component: AlexCard }`}
+                </code>
+                . That file is the single list the <strong className="text-foreground">Playground</strong> tab reads; without this step, your card file exists in the repo but never appears in the gallery. You can remove or replace the bundled example row when you&apos;re ready.
+              </li>
+            </ol>
             <CommentaryBubble>
-              Treat this like one playground frame: small scope, fast feedback, lots of room for you to experiment.
+              Treat this like one small Figma frame: duplicate, style, then &quot;publish&quot; by registering — the PR you open should include both your new card file <em>and</em> your line in the registry so reviewers see the full picture.
             </CommentaryBubble>
           </Step>
 
           <Step number={4} title="Committing">
             <p className="text-sm text-muted-foreground">
-              Open the <strong className="text-foreground">Source Control</strong> tab in Cursor. <strong className="text-foreground">Stage</strong> your changes first — that means you tell Git which edited files belong in this save: tick them or hit the <strong className="text-foreground">+</strong> next to each file (think &quot;put these edits in the box&quot;). Then write a clear message (e.g. &quot;Added [Name] profile card&quot;) and commit.
+              Open the <strong className="text-foreground">Source Control</strong> tab in Cursor. <strong className="text-foreground">Stage</strong> your changes first — include both your new card file <em>and</em>{" "}
+              <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">designer-cards-registry.tsx</code> if you edited it (tick files or hit the <strong className="text-foreground">+</strong> next to each — think &quot;put these edits in the box&quot;). Type a clear commit message (e.g. &quot;Added [Name] profile card to Playground gallery&quot;).
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Then press the big <strong className="text-foreground">Commit</strong> button — yes, that one. That&apos;s the right control after staging: it saves a <strong className="text-foreground">commit</strong>, which is a snapshot of your work <strong className="text-foreground">on your computer only</strong>. You are not uploading to GitHub yet.
             </p>
             <CommentaryBubble>
               &quot;Stage&quot; sounds formal; it&apos;s really just choosing what goes into your next snapshot before you hit commit.
@@ -211,9 +253,21 @@ export function GitGuide() {
 
           <Step number={5} title="Pushing &amp; opening a PR">
             <p className="text-sm text-muted-foreground">
-              Push your branch, then use the GitHub link Cursor or the terminal prints to open your first Pull Request.
+              <strong className="text-foreground">Commit vs push:</strong> a <strong className="text-foreground">commit</strong> is a local save (what you did in the previous step with the <strong className="text-foreground">Commit</strong> button). A <strong className="text-foreground">push</strong> sends those commits up to GitHub so others can see your branch. You need <em>both</em> — don&apos;t skip commit and only type <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">git push</code> until you&apos;ve actually committed.
             </p>
-            <CommandBlock command="git push -u origin feature/yourname-card" description="Run this after you commit — it publishes your branch and sets the upstream" />
+            <p className="text-sm text-muted-foreground">
+              To push, you can either run the command below in the <strong className="text-foreground">terminal</strong>, or use <strong className="text-foreground">Publish Branch</strong> / <strong className="text-foreground">Sync</strong> / <strong className="text-foreground">Push</strong> in the Source Control view if Cursor shows it — same job, pick whichever you prefer.
+            </p>
+            <CommandBlock command="git push -u origin feature/yourname-card" description="Run after your commit — publishes your branch to GitHub and sets upstream (swap branch name if yours differs)" />
+            <p className="text-sm text-muted-foreground">
+              Then use the GitHub link Cursor or the terminal prints to open your first Pull Request.
+            </p>
+            <CommentaryBubble name="Personal note">
+              After you publish, Cursor sometimes pops up asking whether you&apos;d like to run{" "}
+              <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">git fetch</code> periodically. I wanted to flag that here: <strong className="font-medium text-foreground">fetch</strong> only downloads <em>information</em> about <strong className="font-medium text-foreground">new commits and branches on the remote</strong> (what exists on GitHub) and updates your local picture of that — it does <strong className="font-medium text-foreground">not</strong> change the files in your project folder or merge anything into the branch you&apos;re on.{" "}
+              <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">git pull</code> is different: it brings those remote changes <strong className="font-medium text-foreground">into your checkout</strong> so your files actually update. Saying yes to periodic fetch just keeps branch lists and history fresher; you can still run{" "}
+              <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">git pull</code> whenever you want the latest code in your workspace.
+            </CommentaryBubble>
           </Step>
         </Section>
 
