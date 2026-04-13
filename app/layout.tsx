@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cursor Guide for Designers",
+  title: "Cursor Guide for NestoDesigners",
   description: "Create a custom design system and use it as the base for your projects",
 };
 
