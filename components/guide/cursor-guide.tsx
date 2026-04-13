@@ -296,7 +296,11 @@ export function CursorGuide() {
             </p>
             <CommandBlock command="cd [project-folder-name] && npm run dev" description="Navigate to your project folder, then start the dev server" />
             <CommentaryBubble>
-              Now you can have fun! Experiment, try different things, and see what you can create. The development server will automatically reload when you make changes. Cursor will automatically provide you with a preview in the app. Before doing so, it will also provide you with a link like &apos;http://localhost:3000&apos; which you can open in your browser.
+              Now you can have fun! Experiment, try different things, and see what you can create. The development server will automatically reload when you make changes. Cursor may show a preview; you can also open{" "}
+              <a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline">
+                http://localhost:3000/
+              </a>{" "}
+              in your browser — for this playground repo, that URL opens the app directly.
             </CommentaryBubble>
           </Step>
         </Section>

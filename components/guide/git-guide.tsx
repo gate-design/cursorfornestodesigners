@@ -160,6 +160,28 @@ export function GitGuide() {
                 {PLAYGROUND_REPO_WEB.replace("https://", "")}
               </a>
             </p>
+            <p className="text-sm text-muted-foreground">
+              After the clone finishes, open the project folder in Cursor (it will usually be called{" "}
+              <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">cursorfornestodesigners</code>
+              ). In the terminal, from that folder, install dependencies and start the dev server:
+            </p>
+            <CommandBlock command="npm install" description="Once — downloads the packages this project needs" />
+            <CommandBlock command="npm run dev" description="Starts the local site; watch the terminal for the ready message" />
+            <p className="text-sm text-muted-foreground">
+              Then open{" "}
+              <a
+                href="http://localhost:3000/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary hover:underline"
+              >
+                http://localhost:3000/
+              </a>{" "}
+              in your browser — for this repository, local development is set up so the app loads at the <strong className="text-foreground">root</strong> URL (you don&apos;t need to add{" "}
+              <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">/cursorfornestodesigners/</code> after{" "}
+              <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">localhost:3000</code>
+              ). The <strong className="text-foreground">live</strong> site on GitHub Pages still uses the longer path; only your machine&apos;s dev server uses the short link.
+            </p>
           </Step>
         </Section>
 
@@ -208,12 +230,23 @@ export function GitGuide() {
               Work in <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">components/playground/</code> in your clone (same paths as this project).
             </p>
             <ol className="ml-4 list-decimal space-y-3 text-sm text-muted-foreground">
-              <li>
-                <strong className="text-foreground">Duplicate the template.</strong> Copy{" "}
-                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">TemplateCard.tsx</code> to a new file, e.g.{" "}
-                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">YourNameCard.tsx</code>, and export your own component (e.g.{" "}
-                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">export function YourNameCard()</code>
-                ).
+              <li className="space-y-2">
+                <div>
+                  <strong className="text-foreground">Duplicate the template.</strong> Copy{" "}
+                  <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">TemplateCard.tsx</code> to a new file, e.g.{" "}
+                  <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">YourNameCard.tsx</code>. In that new file, keep the same overall structure, but rename the main function so it matches your file — for example change{" "}
+                  <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">TemplateCard</code> to{" "}
+                  <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">YourNameCard</code> and keep the word{" "}
+                  <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">export</code> at the start of that line, like{" "}
+                  <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">export function YourNameCard()</code>
+                  .
+                </div>
+                <p className="rounded-md border border-border/80 bg-muted/30 px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+                  <strong className="text-foreground">ELI5 — &quot;export&quot; and &quot;component&quot;:</strong> Think of a{" "}
+                  <strong className="text-foreground">component</strong> as a named, reusable block of UI (like a component or symbol you might reuse in a design tool).{" "}
+                  <strong className="text-foreground">Export</strong> simply means &quot;this block has a name, and other files are allowed to use it.&quot; The little{" "}
+                  <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.7rem]">export</code> keyword in front of your function is what makes that true — without it, the registry file couldn&apos;t import your card. You don&apos;t have to understand much more than: duplicate the file, rename the function to yours, leave <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.7rem]">export</code> in place, and you&apos;re good.
+                </p>
               </li>
               <li>
                 <strong className="text-foreground">Customize it.</strong> Use Cursor (

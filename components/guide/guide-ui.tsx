@@ -4,6 +4,7 @@ import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { CopyIcon, CheckIcon } from "@phosphor-icons/react"
+import { withBasePath } from "@/lib/base-path"
 import { cn } from "@/lib/utils"
 
 export function CopyButton({ text, className }: { text: string; className?: string }) {
@@ -48,7 +49,7 @@ export function CommandBlock({ command, description }: { command: string; descri
 
 export function CommentaryBubble({ children, name = "You" }: { children: React.ReactNode; name?: string }) {
   const [imageError, setImageError] = React.useState(false)
-  const avatarSrc = "/cursorfornestodesigners/avatar.png"
+  const avatarSrc = withBasePath("/avatar.png")
 
   return (
     <div className="flex gap-3">
