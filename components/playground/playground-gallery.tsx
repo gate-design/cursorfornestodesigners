@@ -10,7 +10,7 @@ export function PlaygroundGallery() {
           {label && (
             <p className="text-xs font-medium text-muted-foreground">{label}</p>
           )}
-          <div className="flex justify-center rounded-xl border border-border/80 bg-muted/15 p-6">
+          <div className="flex justify-center rounded-none border border-border/80 bg-muted/15 p-6">
             <Component />
           </div>
         </div>

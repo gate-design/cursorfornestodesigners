@@ -16,7 +16,7 @@ export function PlaygroundPanel() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-10 space-y-4 text-center">
-        <h1 className="text-4xl font-bold">Playground</h1>
+        <h1 className="font-mono text-4xl font-bold tracking-tight">Playground</h1>
         <p className="text-lg text-muted-foreground">
           A shared <strong className="font-medium text-foreground">canvas</strong> — nothing to memorize here. Use the{" "}
           <strong className="font-medium text-foreground">Git</strong> tab to learn clone, branch, commit, push, and PR; use this tab to see everyone&apos;s cards once they land in the repo. Pull and push there, watch this view update after merges and deploys.

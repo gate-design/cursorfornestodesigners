@@ -65,7 +65,7 @@ export function CursorGuide() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-12 space-y-4 text-center">
-        <h1 className="text-4xl font-bold">Cursor Guide for Designers</h1>
+        <h1 className="font-mono text-4xl font-bold tracking-tight">Cursor Guide for Designers</h1>
         <p className="text-lg text-muted-foreground">
           Create a custom design system and use it as the base for your projects
         </p>
@@ -166,7 +166,7 @@ export function CursorGuide() {
           title="1. Create Your Design System &amp; Project"
           description="Customize your design system with shadcn/ui and use it as the base for your projects (it&apos;s how I built this site!)"
         >
-          <div className="mb-6 rounded-lg border border-primary/20 bg-primary/5 p-4">
+          <div className="mb-6 rounded-none border border-primary/20 bg-primary/5 p-4">
             <p className="text-sm font-medium text-primary">🎨 Your Design System, Your Projects</p>
             <p className="mt-2 text-sm text-muted-foreground">
               You&apos;ll use shadcn/ui to define your own colors, fonts, and components. Then you create a project from that design system and use it as the base for everything you build.
@@ -186,7 +186,7 @@ export function CursorGuide() {
             <p className="text-sm text-muted-foreground">
               Open Cursor and open the folder you created (File → Open Folder). Then click the gear icon in the upper-right corner and ensure all features are enabled.
             </p>
-            <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
+            <div className="space-y-2 rounded-none border bg-muted/50 p-4">
               <div className="flex items-center gap-2">
                 <input type="checkbox" checked readOnly className="h-4 w-4 rounded border-primary text-primary" />
                 <label className="text-sm">Agents</label>
@@ -222,7 +222,7 @@ export function CursorGuide() {
                 href="https://ui.shadcn.com/create"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                className="inline-flex items-center gap-2 rounded-none border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
               >
                 Open shadcn/ui Create
                 <span className="text-xs">↗</span>
@@ -246,7 +246,7 @@ export function CursorGuide() {
             <p className="text-sm text-muted-foreground">
               Click on the &apos;npm&apos; tab and copy the command that appears.
             </p>
-            <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
+            <div className="space-y-2 rounded-none border bg-muted/50 p-4">
               <p className="text-sm font-medium">Example command (yours will be different):</p>
               <CommandBlock command="npx shadcn@latest init -d" />
             </div>
@@ -266,7 +266,7 @@ export function CursorGuide() {
             <p className="text-sm text-muted-foreground">
               Provide Cursor with a screenshot you want to reproduce, or paste a PRD (product requirements document) of any length. You can finish your prompt with &quot;run dev&quot; so Cursor knows to run the app locally for you.
             </p>
-            <div className="space-y-2 rounded-lg border bg-muted/50 p-4">
+            <div className="space-y-2 rounded-none border bg-muted/50 p-4">
               <p className="text-sm font-medium">Ask Cursor (examples):</p>
               <p className="rounded bg-background p-3 font-mono text-sm italic">
                 &quot;Reproduce this screenshot. Run dev.&quot; [attach your screenshot]
