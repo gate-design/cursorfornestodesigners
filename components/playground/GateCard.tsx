@@ -10,7 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
-export type TemplateCardProps = {
+export type GateCardProps = {
   name?: string
   role?: string
   bio?: string
@@ -22,13 +22,13 @@ export type TemplateCardProps = {
  * Starter profile card — duplicate this file as `YourNameCard.tsx` and customize.
  * Used in the Playground tab and referenced from the Git guide.
  */
-export function TemplateCard({
+export function GateCard({
   name = "Gaetano",
   role = "👴🏾 Designer",
   bio = "Likes to build things",
   initials = "GN",
   className,
-}: TemplateCardProps) {
+}: GateCardProps) {
   return (
     <Card
       size="sm"
@@ -64,7 +64,7 @@ export function TemplateCard({
 /** Example filled-in card — what yours might look like after you customize the template. */
 export function MockProfileCard() {
   return (
-    <TemplateCard
+    <GateCard
       name="Alex Morgan"
       role="Product design"
       initials="AM"
