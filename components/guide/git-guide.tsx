@@ -14,7 +14,6 @@ import {
   Step,
 } from "@/components/guide/guide-ui"
 import {
-  PLAYGROUND_LIVE_SITE,
   PLAYGROUND_REPO_CLONE_URL,
   PLAYGROUND_REPO_WEB,
 } from "@/lib/playground-repo"
@@ -371,25 +370,10 @@ export function GitGuide() {
 
           <Step number={4} title="Merging &amp; seeing it live">
             <p className="text-sm text-muted-foreground">
-              When your PR is approved, merge it with <strong className="text-foreground">Squash and merge</strong> (unless your team asks you to use a different strategy). You don&apos;t need Vercel or Netlify for this project — it deploys with <strong className="text-foreground">GitHub Pages</strong>. After your work lands on <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">main</code>, the workflow in{" "}
+              When your PR is approved, merge it with <strong className="text-foreground">Squash and merge</strong>. The project deploys with <strong className="text-foreground">GitHub Pages</strong>. After your work lands on <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">main</code>, the workflow in{" "}
               <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">.github/workflows/deploy.yml</code> builds the static site and publishes it; give it a minute, then check that the run is green under the repo&apos;s{" "}
               <strong className="text-foreground">Actions</strong> tab.
             </p>
-            <p className="text-sm text-muted-foreground">
-              Live site (same guides + Playground, hosted on GitHub Pages):{" "}
-              <a
-                href={PLAYGROUND_LIVE_SITE}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-primary hover:underline"
-              >
-                {PLAYGROUND_LIVE_SITE.replace(/^https:\/\//, "")}
-              </a>
-            </p>
-            <CommentaryBubble>
-              That URL looks long because this Next.js app uses a <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">basePath</code> — the path repeats the repo name. If your team ever points a custom domain at Pages, swap the link in{" "}
-              <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">lib/playground-repo.ts</code> so designers aren&apos;t confused.
-            </CommentaryBubble>
           </Step>
         </Section>
 
