@@ -1,15 +1,16 @@
 "use client"
 
 import * as React from "react"
-import { BookOpen, CirclesFour, GitBranch, Sparkle } from "@phosphor-icons/react"
+import { BookOpen, CirclesFour, GitBranch, Palette, Sparkle } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { CursorGuide } from "@/components/guide/cursor-guide"
 import { GitGuide } from "@/components/guide/git-guide"
 import { ClaudeComingSoon } from "@/components/guide/claude-coming-soon"
+import { DesignSystemComingSoon } from "@/components/guide/design-system-coming-soon"
 import { PlaygroundPanel } from "@/components/guide/playground-panel"
 
-type GuideTab = "cursor" | "git" | "playground" | "claude"
+type GuideTab = "cursor" | "git" | "playground" | "design-system" | "claude"
 
 const tabs: {
   id: GuideTab
@@ -20,6 +21,12 @@ const tabs: {
   { id: "cursor", label: "Cursor", icon: BookOpen },
   { id: "git", label: "Git", icon: GitBranch },
   { id: "playground", label: "Playground", icon: CirclesFour },
+  {
+    id: "design-system",
+    label: "Design system",
+    icon: Palette,
+    comingSoon: true,
+  },
   { id: "claude", label: "Claude", icon: Sparkle, comingSoon: true },
 ]
 
@@ -65,7 +72,7 @@ export default function Page() {
                     <span className="truncate">{label}</span>
                     {comingSoon && (
                       <span className="max-w-[5.5rem] truncate text-[10px] font-medium leading-tight text-muted-foreground sm:max-w-none md:ml-auto">
-                        (coming soon)
+                        (soon™)
                       </span>
                     )}
                   </Button>
@@ -79,6 +86,7 @@ export default function Page() {
           {tab === "cursor" && <CursorGuide />}
           {tab === "git" && <GitGuide />}
           {tab === "playground" && <PlaygroundPanel />}
+          {tab === "design-system" && <DesignSystemComingSoon />}
           {tab === "claude" && <ClaudeComingSoon />}
         </main>
       </div>

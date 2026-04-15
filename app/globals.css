@@ -131,7 +131,4 @@
   .font-mono {
     font-family: var(--font-mono), ui-monospace, monospace;
   }
-  html {
-    @apply font-mono;
-  }
 }
