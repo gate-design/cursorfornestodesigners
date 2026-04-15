@@ -46,7 +46,7 @@ export default function Page() {
           <div className="flex flex-col gap-1 p-3 md:flex-1 md:p-4">
             <div className="mb-2 hidden px-1 md:block">
               <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Guides
+                Guides for
               </p>
               <p className="text-sm font-semibold leading-tight">Nesto Designers</p>
             </div>
