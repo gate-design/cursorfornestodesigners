@@ -241,7 +241,11 @@ export function GitGuide() {
               Work inside <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">components/playground/</code> — short version of the steps:
             </p>
             <ol className="ml-4 list-decimal space-y-2 text-sm text-muted-foreground">
-              <li>Copy <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">TemplateCard.tsx</code> to a new file named after you; rename the function inside to match.</li>
+              <li>
+                Copy <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">TemplateCard.tsx</code> to a new file named after you, then rename the function inside to match. This is often easiest in the{" "}
+                <strong className="text-foreground">project folder on your computer</strong> (Finder on Mac, File Explorer on Windows): open your clone, go to{" "}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">components/playground/</code>, duplicate the file, and rename it — Cursor will pick up the new file right away.
+              </li>
               <li>Style it with Cursor&apos;s help; refresh localhost to preview.</li>
               <li>
                 Register it in{" "}
