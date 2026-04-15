@@ -23,10 +23,10 @@ export type GateCardProps = {
  * Used in the Playground tab and referenced from the Git guide.
  */
 export function GateCard({
-  name = "Gaetano",
+  name = "GateGaetano",
   role = "👴🏾 Designer",
-  bio = "Likes to build things",
-  initials = "GN",
+  bio = "Likes to build things, and likes turtles",
+  initials = "GG",
   className,
 }: GateCardProps) {
   return (
@@ -61,14 +61,3 @@ export function GateCard({
   )
 }
 
-/** Example filled-in card — what yours might look like after you customize the template. */
-export function MockProfileCard() {
-  return (
-    <GateCard
-      name="Alex Morgan"
-      role="Product design"
-      initials="AM"
-      bio="I pair with eng on Tailwind polish and use this repo to practice branches and PRs before touching production code."
-    />
-  )
-}

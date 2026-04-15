@@ -2,6 +2,7 @@
 
 import type { ComponentType } from "react"
 import { MockProfileCard } from "@/components/playground/TemplateCard"
+import { GateCard } from "./GateCard"
 
 /**
  * Playground gallery — add your card here so it shows on the Playground tab for everyone.
@@ -24,6 +25,11 @@ export const DESIGNER_CARDS: DesignerCardEntry[] = [
     id: "example",
     label: "Example — swap this row for your card once yours is ready",
     Component: MockProfileCard,
+  },
+  {
+    id: "gate",
+    label: "Example — this is another example",
+    Component: GateCard,
   },
   // import { YourNameCard } from "./YourNameCard"
   // { id: "your-name", label: "Your name", Component: YourNameCard },
