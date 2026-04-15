@@ -1,12 +1,6 @@
 "use client"
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 export function DesignSystemComingSoon() {
@@ -23,6 +17,9 @@ export function DesignSystemComingSoon() {
           <div className="flex flex-wrap items-center gap-2">
             <CardTitle>Coming soon</CardTitle>
             <Badge variant="secondary">Planned</Badge>
+            <span className="text-lg leading-none" aria-hidden="true">
+              🎨 🖌️ 📐 ✨ 🧱 💠 🎯 🌈 ⭐ 🔲
+            </span>
           </div>
         </CardHeader>
       </Card>
