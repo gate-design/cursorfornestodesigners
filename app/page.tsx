@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { CursorGuide } from "@/components/guide/cursor-guide"
 import { GitGuide } from "@/components/guide/git-guide"
-import { ClaudeComingSoon } from "@/components/guide/claude-coming-soon"
+import { ClaudeDesignGuide } from "@/components/guide/claude-design-guide"
 import { DesignSystemComingSoon } from "@/components/guide/design-system-coming-soon"
 import { PlaygroundPanel } from "@/components/guide/playground-panel"
 
@@ -27,7 +27,7 @@ const tabs: {
     icon: Palette,
     comingSoon: true,
   },
-  { id: "claude", label: "Claude", icon: Sparkle, comingSoon: true },
+  { id: "claude", label: "ClaudeDesign", icon: Sparkle },
 ]
 
 export default function Page() {
@@ -87,7 +87,7 @@ export default function Page() {
           {tab === "git" && <GitGuide />}
           {tab === "playground" && <PlaygroundPanel />}
           {tab === "design-system" && <DesignSystemComingSoon />}
-          {tab === "claude" && <ClaudeComingSoon />}
+          {tab === "claude" && <ClaudeDesignGuide />}
         </main>
       </div>
     </div>
