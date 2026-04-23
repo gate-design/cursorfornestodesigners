@@ -3,6 +3,7 @@
 import type { ComponentType } from "react"
 import { MockProfileCard } from "@/components/playground/TemplateCard"
 import { GateCard } from "./GateCard"
+import { VeroCard } from "./VeroCard"
 
 /**
  * Playground gallery — add your card here so it shows on the Playground tab for everyone.
@@ -30,6 +31,11 @@ export const DESIGNER_CARDS: DesignerCardEntry[] = [
     id: "gate",
     label: "Example — this is another example",
     Component: GateCard,
+  },
+  {
+    id: "vero",
+    label: "Vero Jobin",
+    Component: VeroCard,
   },
   // import { YourNameCard } from "./YourNameCard"
   // { id: "your-name", label: "Your name", Component: YourNameCard },
