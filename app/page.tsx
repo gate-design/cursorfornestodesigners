@@ -21,7 +21,7 @@ const tabs: {
   { id: "cursor", label: "Cursor", icon: BookOpen },
   { id: "git", label: "Git", icon: GitBranch },
   { id: "playground", label: "Playground", icon: CirclesFour },
-  { id: "claude", label: "ClaudeDesign", icon: Sparkle },
+  { id: "claude", label: "Claude Design", icon: Sparkle },
   {
     id: "design-system",
     label: "Design system",
@@ -63,8 +63,7 @@ export default function Page() {
                     variant={isActive ? "secondary" : "ghost"}
                     className={cn(
                       "justify-center gap-2 md:justify-start",
-                      "min-h-10 md:flex-none",
-                      id === "design-system" && "mt-6"
+                      "min-h-10 md:flex-none"
                     )}
                     onClick={() => setTab(id)}
                     aria-current={isActive ? "page" : undefined}
