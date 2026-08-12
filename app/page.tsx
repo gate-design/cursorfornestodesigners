@@ -1,16 +1,16 @@
 "use client"
 
 import * as React from "react"
-import { BookOpen, CirclesFour, GitBranch, Palette, Sparkle } from "@phosphor-icons/react"
+import { BookOpen, CirclesFour, GitBranch, Sparkle, Tag } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { CursorGuide } from "@/components/guide/cursor-guide"
 import { GitGuide } from "@/components/guide/git-guide"
 import { ClaudeDesignGuide } from "@/components/guide/claude-design-guide"
-import { DesignSystemComingSoon } from "@/components/guide/design-system-coming-soon"
+import { ComponentsGuide } from "@/components/guide/components-guide"
 import { PlaygroundPanel } from "@/components/guide/playground-panel"
 
-type GuideTab = "cursor" | "git" | "playground" | "design-system" | "claude"
+type GuideTab = "cursor" | "git" | "playground" | "claude" | "components"
 
 const tabs: {
   id: GuideTab
@@ -22,12 +22,7 @@ const tabs: {
   { id: "git", label: "Git", icon: GitBranch },
   { id: "playground", label: "Playground", icon: CirclesFour },
   { id: "claude", label: "Claude Design", icon: Sparkle },
-  {
-    id: "design-system",
-    label: "Design system",
-    icon: Palette,
-    comingSoon: true,
-  },
+  { id: "components", label: "Jira Components", icon: Tag },
 ]
 
 export default function Page() {
@@ -45,10 +40,7 @@ export default function Page() {
         >
           <div className="flex flex-col gap-1 p-3 md:flex-1 md:p-4">
             <div className="mb-2 hidden px-1 md:block">
-              <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Guides for
-              </p>
-              <p className="text-sm font-semibold leading-tight">Nesto Designers</p>
+              <p className="text-sm font-semibold leading-tight">Design guide repo</p>
             </div>
             <nav
               className="grid grid-cols-2 gap-1 sm:grid-cols-4 md:flex md:flex-col md:gap-1"
@@ -86,8 +78,8 @@ export default function Page() {
           {tab === "cursor" && <CursorGuide />}
           {tab === "git" && <GitGuide />}
           {tab === "playground" && <PlaygroundPanel />}
-          {tab === "design-system" && <DesignSystemComingSoon />}
           {tab === "claude" && <ClaudeDesignGuide />}
+          {tab === "components" && <ComponentsGuide />}
         </main>
       </div>
     </div>

@@ -1,0 +1,26 @@
+prefix,section,subpage,route,notes
+#,INSTRUCTIONS - rows starting with # are ignored by the script - read then delete this block,,,
+#,prefix = your app's short name (same on every row) e.g. Servicing Renewals,,,
+#,section = the nav-level section a user sees e.g. Payments,,,
+#,subpage = leave blank if the section is one screen; otherwise one row per tab/sub-route,,,
+#,route = optional real URL path used as the component description,,,
+#,notes = optional short disambiguation text e.g. distinct from the standalone X page,,,
+#,you do not need to add Design System or Sitewide rows - the script adds those automatically per prefix,,,
+#,--- WORKED EXAMPLE FROM MO (Gate's app) - delete this whole block once you understand the pattern ---,,,
+MO,Dashboard,,/,Always visible for non-auditors
+MO,Qualification,,/applications/[id]/qualification,Standalone SDR/Advisor light flow - distinct from the App Review Qualification tab
+MO,Rates,Rate List,/rates,
+MO,Rates,Rate Detail,/rates/[rateId],
+MO,Rates,HELOC Rate Detail,/rates/heloc/[rateId],
+MO,Application Review,Applicants,/applications/[id] -> Applicants tab,
+MO,Application Review,Qualification,/applications/[id] -> Qualification tab,Full UW tool - distinct from the standalone Qualification page
+#,--- DELETE EVERYTHING ABOVE THIS LINE, THEN FILL IN YOUR OWN APP BELOW ---,,,
+#,,,,
+#,,,,
+#,,,,
+#,,,,
+#,,,,
+#,,,,
+#,,,,
+#,,,,
+#,,,,

@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cursor Guide for NestoDesigners",
-  description: "Create a custom design system and use it as the base for your projects",
+  title: "Design guide repo",
+  description: "Guides for Nesto designers: Cursor, Git, Claude Design, and Jira component mapping",
 };
 
 export default function RootLayout({
