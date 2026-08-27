@@ -1,0 +1,333 @@
+"use client"
+
+import type { ReactNode } from "react"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+import {
+  CommandBlock,
+  CommentaryBubble,
+  CopyButton,
+  Section,
+  Step,
+} from "@/components/guide/guide-ui"
+import { withBasePath } from "@/lib/base-path"
+
+const CONFLUENCE_URL = "https://nestoca.atlassian.net/wiki/x/d4G9OgE"
+
+function PromptBlock({ label, prompt }: { label: string; prompt: string }) {
+  return (
+    <div className="space-y-2 rounded-none border border-primary/25 bg-primary/5 p-4">
+      <div className="flex items-start justify-between gap-3">
+        <p className="text-[11px] font-semibold tracking-wide text-primary [font-variant:small-caps]">
+          {label}
+        </p>
+        <CopyButton text={prompt} className="-mt-1 shrink-0" />
+      </div>
+      <pre className="overflow-x-auto whitespace-pre-wrap break-words font-mono text-xs leading-relaxed text-foreground">
+        {prompt}
+      </pre>
+    </div>
+  )
+}
+
+function DownloadCard({
+  fileName,
+  description,
+  href,
+}: {
+  fileName: string
+  description: string
+  href: string
+}) {
+  return (
+    <a
+      href={href}
+      download
+      className="block rounded-none border border-border bg-muted/30 p-4 transition hover:bg-muted/50"
+    >
+      <p className="font-mono text-sm font-medium text-primary">↓ {fileName}</p>
+      <p className="mt-1 text-xs text-muted-foreground">{description}</p>
+    </a>
+  )
+}
+
+function Callout({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="rounded-none border-l-2 border-primary bg-muted/30 p-4">
+      <p className="text-sm font-semibold text-foreground">{title}</p>
+      <div className="mt-1 text-sm leading-relaxed text-muted-foreground">{children}</div>
+    </div>
+  )
+}
+
+const STARTER_PROMPT = `/component-ac
+
+Component: <name> — new / existing v1 / existing v2
+Figma: <link with node-id>
+Accessibility spec: <link, or none>
+Decisions already made:
+- <one line each, or none>`
+
+const EXAMPLE_SIMPLE = `/component-ac
+
+Component: Chip — existing v1
+Figma: https://www.figma.com/design/CHACynbUiJMgOrwgNWdsoz/branch/0TIb0xpdr3g3AqM1DDFK2n/Nest-UI-Kit?node-id=420-1191
+Accessibility spec: none
+Decisions already made: none`
+
+const EXAMPLE_RICH = `/component-ac
+
+Component: Table — existing v2
+Figma: https://www.figma.com/design/CHACynbUiJMgOrwgNWdsoz/branch/TilWBI6tRUxOycqa2lIcpW/Nest-UI-Kit?node-id=73671-42091
+Accessibility spec: https://nestoca.atlassian.net/wiki/spaces/PD/pages/5276565729/A11Y+MO+BB+Table+v2
+Decisions already made:
+- Whole-row click is decided per table, not per row
+- A row either navigates or expands, never both
+- Density is being removed; one row height
+- Copy says "results", never "entries"`
+
+const EXAMPLE_NEW = `/component-ac
+
+Component: Segmented control — new
+Figma: https://www.figma.com/design/.../Nest-UI-Kit?node-id=1234-5678
+Accessibility spec: none
+Decisions already made:
+- Replaces the tab-styled radio group on the Documents screen
+- Max four segments; longer lists stay a Select`
+
+export function ComponentAcGuide() {
+  const skillHref = withBasePath("/skills/component-ac.zip")
+
+  return (
+    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mb-12 space-y-4 text-center">
+        <h1 className="font-mono text-4xl font-bold tracking-tight">Component ACs</h1>
+        <p className="text-lg text-muted-foreground">
+          A skill that turns a Figma component into acceptance criteria an engineer can actually groom — no implementation details, no measurements, no invented rules.
+        </p>
+      </div>
+
+      <Card className="mb-12">
+        <CardHeader>
+          <CardTitle>Table of contents</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <a href="#ac-why" className="block text-sm text-primary hover:underline">
+            What it does
+          </a>
+          <a href="#ac-install" className="block text-sm text-primary hover:underline">
+            Install it — Claude Code or Claude Desktop
+          </a>
+          <a href="#ac-gather" className="block text-sm text-primary hover:underline">
+            Gather four things
+          </a>
+          <a href="#ac-use" className="block text-sm text-primary hover:underline">
+            Use it
+          </a>
+          <a href="#ac-back" className="block text-sm text-primary hover:underline">
+            What comes back
+          </a>
+        </CardContent>
+      </Card>
+
+      <div className="space-y-12">
+        <Section id="ac-why" title="What it does">
+          <p className="text-sm text-muted-foreground">
+            You point it at a Figma component. It reads the design, reads the current implementation in{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">nestoca/fe-shared</code>, and writes a markdown document you paste straight into a Jira description.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            The rules it follows came from front-end feedback on a real hand-off: state the expected outcome, leave the <em>how</em> to engineering, and hand back the decisions that aren&apos;t design&apos;s to make. The full reasoning lives on{" "}
+            <a href={CONFLUENCE_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline">
+              the Confluence page
+            </a>{" "}
+            — you don&apos;t need to read it to use the skill.
+          </p>
+
+          <Callout title="Two things it deliberately won't do">
+            <ul className="ml-4 list-disc space-y-1">
+              <li>
+                <strong className="text-foreground">No measurements.</strong> No px, no rem, no hex. Figma is the source for values — the developer reads specs there, so a number in the ticket is a second source of truth that goes stale.
+              </li>
+              <li>
+                <strong className="text-foreground">No invented rules.</strong> If a behaviour is ambiguous and you haven&apos;t told it the answer, it goes in <em>Open decisions</em> rather than being written as though it were settled.
+              </li>
+            </ul>
+          </Callout>
+
+          <CommentaryBubble name="Gate">
+            The first version of this doc told engineers which files to change and what to name the props. That&apos;s the part they pushed back on hardest — not because it was wrong, but because they then had to work out which of my guesses to keep before they could start. The skill exists to stop me doing that again.
+          </CommentaryBubble>
+        </Section>
+
+        <Separator />
+
+        <Section
+          id="ac-install"
+          title="Install it"
+          description="Same file either way. Pick whichever app you already use."
+        >
+          <DownloadCard
+            fileName="component-ac.zip"
+            description="The skill — one SKILL.md plus a short readme. 6 KB."
+            href={skillHref}
+          />
+
+          <div className="space-y-6 pt-2">
+            <div>
+              <h3 className="mb-3 font-mono text-lg font-medium tracking-tight">In Claude Code</h3>
+              <div className="space-y-4">
+                <Step number={1} title="Unzip it into your skills folder">
+                  <CommandBlock
+                    command="unzip ~/Downloads/component-ac.zip -d ~/.claude/skills/"
+                    description="Creates ~/.claude/skills/component-ac/"
+                  />
+                </Step>
+                <Step number={2} title="Restart Claude Code, then type the slash command">
+                  <CommandBlock command="/component-ac" description="If it doesn't appear, close the session and start a new one" />
+                </Step>
+              </div>
+            </div>
+
+            <Separator />
+
+            <div>
+              <h3 className="mb-3 font-mono text-lg font-medium tracking-tight">In Claude Desktop</h3>
+              <div className="space-y-4">
+                <Step number={1} title="Upload the zip">
+                  <p className="text-sm text-muted-foreground">
+                    Settings → Capabilities → Skills → upload{" "}
+                    <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">component-ac.zip</code>. Don&apos;t unzip it first — Desktop wants the archive.
+                  </p>
+                </Step>
+                <Step number={2} title="Connect Figma">
+                  <p className="text-sm text-muted-foreground">
+                    The skill needs to read the design file. Add the Figma connector in Settings → Connectors if it isn&apos;t there already.
+                  </p>
+                </Step>
+              </div>
+            </div>
+          </div>
+
+          <Callout title="One difference worth knowing">
+            <p>
+              Claude Code can read <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">nestoca/fe-shared</code> directly through the <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">gh</code> command line. Desktop can&apos;t, unless a GitHub connector is set up for that repo.
+            </p>
+            <p className="mt-2">
+              That only matters for an <strong className="text-foreground">update</strong> to an existing component, where the point is comparing the design against what shipped. A <strong className="text-foreground">new</strong> component works the same in both. If it can&apos;t reach the repo it says so up front and offers to carry on from the design alone — and it records in the document that the code wasn&apos;t read, so nobody mistakes silence for verification.
+            </p>
+          </Callout>
+
+          <CommentaryBubble name="Gate">
+            I&apos;ll post updates to the skill in Slack — re-download and replace your copy when I do. There&apos;s no auto-update, so if something on this page contradicts your local copy, this page is newer.
+          </CommentaryBubble>
+        </Section>
+
+        <Separator />
+
+        <Section
+          id="ac-gather"
+          title="Gather four things"
+          description="It will ask for anything you leave out, but having them ready makes it one round trip"
+        >
+          <div className="space-y-4 text-sm text-muted-foreground">
+            <ol className="ml-4 list-decimal space-y-3">
+              <li>
+                <strong className="text-foreground">The Figma link.</strong> It has to point at the specific component or frame, not the file. Select the frame, right-click → <em>Copy link to selection</em>. If the link has no{" "}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">node-id=</code> in it, it&apos;s the wrong link.
+              </li>
+              <li>
+                <strong className="text-foreground">The component name, and whether it exists.</strong> New, existing v1, or existing v2. If you&apos;re not sure, say so — it can check.
+              </li>
+              <li>
+                <strong className="text-foreground">The accessibility spec</strong>, if the component has one. A link, or <em>none</em>.
+              </li>
+              <li>
+                <strong className="text-foreground">Anything already decided.</strong> Rulings from a review, a Slack thread, a call with engineering.
+              </li>
+            </ol>
+          </div>
+
+          <Callout title="Point 4 is the one people skip">
+            <p>
+              A decision like &ldquo;row click is decided per table, not per row&rdquo; cannot be worked out from a Figma file. Leave it out and you get a document that looks right and isn&apos;t, with nothing flagging that it was a guess. Two lines here saves a full re-review later.
+            </p>
+          </Callout>
+        </Section>
+
+        <Separator />
+
+        <Section id="ac-use" title="Use it">
+          <p className="text-sm text-muted-foreground">
+            Type the slash command and fill in the four lines. You can also just send{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">/component-ac</code> on its own and answer the questions it asks.
+          </p>
+
+          <PromptBlock label="The shape" prompt={STARTER_PROMPT} />
+
+          <div className="space-y-4 pt-2">
+            <div>
+              <p className="mb-2 text-sm font-medium text-foreground">
+                A component that already exists, nothing special about it
+              </p>
+              <PromptBlock label="Most common case" prompt={EXAMPLE_SIMPLE} />
+            </div>
+
+            <div>
+              <p className="mb-2 text-sm font-medium text-foreground">
+                A component with an accessibility spec and prior rulings
+              </p>
+              <PromptBlock label="Note how short each decision is — one line is enough" prompt={EXAMPLE_RICH} />
+            </div>
+
+            <div>
+              <p className="mb-2 text-sm font-medium text-foreground">
+                A brand new component
+              </p>
+              <PromptBlock label="Say what it's for — it can see the design but not the problem it solves" prompt={EXAMPLE_NEW} />
+            </div>
+          </div>
+        </Section>
+
+        <Separator />
+
+        <Section id="ac-back" title="What comes back">
+          <p className="text-sm text-muted-foreground">
+            A markdown document you can paste straight into a Jira description. It describes <strong className="text-foreground">behaviour</strong> — no sizes, no spacing, no colours, because the developer reads those from Figma.
+          </p>
+
+          <Callout title="You don't need to reread it line by line. Check one thing.">
+            <p>
+              The <strong className="text-foreground">Open decisions</strong> table near the bottom. Every row is a question the skill deliberately didn&apos;t answer for you — because it belongs to engineering, to accessibility, or to you. Each row gives you at most two options and says which one it would pick. Answer them, route them, or accept the recommendation, and the document is ready.
+            </p>
+          </Callout>
+
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p className="font-medium text-foreground">Two rows worth reading carefully when they appear:</p>
+            <ul className="ml-4 list-disc space-y-2">
+              <li>
+                <strong className="text-foreground">&ldquo;This value has no token.&rdquo;</strong> Something in the design is unbound, so there&apos;s no name for the developer to reference. That&apos;s a real finding — chase the design system.
+              </li>
+              <li>
+                <strong className="text-foreground">Migration impact.</strong> On an update, a changed default silently alters every instance that never set the prop. Chip is the example: its default size moves up one step, so every chip that never set a size gets taller. Nothing in either design says &ldquo;breaking change&rdquo;.
+              </li>
+            </ul>
+          </div>
+
+          <p className="text-sm text-muted-foreground">
+            If something looks wrong, say so in plain language and it will redo it — &ldquo;this is too long&rdquo;, &ldquo;this is telling engineers how to build it&rdquo;, &ldquo;you invented that rule, we never decided it&rdquo;. You don&apos;t have to fix the document yourself.
+          </p>
+        </Section>
+      </div>
+
+      <div className="mt-16 border-t pt-8 text-center text-sm text-muted-foreground">
+        <p>Questions? Ask Gate on Slack.</p>
+      </div>
+    </div>
+  )
+}

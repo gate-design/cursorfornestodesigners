@@ -1,16 +1,17 @@
 "use client"
 
 import * as React from "react"
-import { BookOpen, CirclesFour, GitBranch, Sparkle, Tag } from "@phosphor-icons/react"
+import { BookOpen, CirclesFour, GitBranch, ListChecks, Sparkle, Tag } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { CursorGuide } from "@/components/guide/cursor-guide"
 import { GitGuide } from "@/components/guide/git-guide"
 import { ClaudeDesignGuide } from "@/components/guide/claude-design-guide"
 import { ComponentsGuide } from "@/components/guide/components-guide"
+import { ComponentAcGuide } from "@/components/guide/component-ac-guide"
 import { PlaygroundPanel } from "@/components/guide/playground-panel"
 
-type GuideTab = "cursor" | "git" | "playground" | "claude" | "components"
+type GuideTab = "cursor" | "git" | "playground" | "claude" | "components" | "component-ac"
 
 const tabs: {
   id: GuideTab
@@ -23,6 +24,7 @@ const tabs: {
   { id: "playground", label: "Playground", icon: CirclesFour },
   { id: "claude", label: "Claude Design", icon: Sparkle },
   { id: "components", label: "Jira Components", icon: Tag },
+  { id: "component-ac", label: "Component ACs", icon: ListChecks },
 ]
 
 export default function Page() {
@@ -80,6 +82,7 @@ export default function Page() {
           {tab === "playground" && <PlaygroundPanel />}
           {tab === "claude" && <ClaudeDesignGuide />}
           {tab === "components" && <ComponentsGuide />}
+          {tab === "component-ac" && <ComponentAcGuide />}
         </main>
       </div>
     </div>
