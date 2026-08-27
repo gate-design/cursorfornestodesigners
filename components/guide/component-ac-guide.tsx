@@ -123,6 +123,9 @@ export function ComponentAcGuide() {
           <a href="#ac-install" className="block text-sm text-primary hover:underline">
             Install it — Claude Code or Claude Desktop
           </a>
+          <a href="#ac-access" className="block text-sm text-primary hover:underline">
+            Give it access to fe-shared
+          </a>
           <a href="#ac-gather" className="block text-sm text-primary hover:underline">
             Gather four things
           </a>
@@ -214,18 +217,93 @@ export function ComponentAcGuide() {
             </div>
           </div>
 
-          <Callout title="One difference worth knowing">
-            <p>
-              Claude Code can read <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">nestoca/fe-shared</code> directly through the <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">gh</code> command line. Desktop can&apos;t, unless a GitHub connector is set up for that repo.
-            </p>
-            <p className="mt-2">
-              That only matters for an <strong className="text-foreground">update</strong> to an existing component, where the point is comparing the design against what shipped. A <strong className="text-foreground">new</strong> component works the same in both. If it can&apos;t reach the repo it says so up front and offers to carry on from the design alone — and it records in the document that the code wasn&apos;t read, so nobody mistakes silence for verification.
-            </p>
-          </Callout>
-
           <CommentaryBubble name="Gate">
             I&apos;ll post updates to the skill in Slack — re-download and replace your copy when I do. There&apos;s no auto-update, so if something on this page contradicts your local copy, this page is newer.
           </CommentaryBubble>
+        </Section>
+
+        <Separator />
+
+        <Section
+          id="ac-access"
+          title="Give it access to fe-shared"
+          description="Only needed for an existing component — a new one has nothing to compare against"
+        >
+          <p className="text-sm text-muted-foreground">
+            To write an <strong className="text-foreground">update</strong>, the skill compares your design against what actually shipped, which means reading{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">nestoca/fe-shared</code>. That repo is private, so it needs your GitHub access. Set this up once.
+          </p>
+
+          <div className="space-y-6 pt-2">
+            <div>
+              <h3 className="mb-3 font-mono text-lg font-medium tracking-tight">Claude Code — the terminal</h3>
+              <div className="space-y-4">
+                <Step number={1} title="Install the GitHub CLI">
+                  <CommandBlock command="brew install gh" description="Skip if `gh --version` already works" />
+                </Step>
+                <Step number={2} title="Log in">
+                  <CommandBlock
+                    command="gh auth login"
+                    description="Choose GitHub.com → HTTPS → yes to git credentials → login with a web browser"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    Accept the default scopes. You need{" "}
+                    <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">repo</code> for private repos and{" "}
+                    <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">read:org</code> for nesto&apos;s org membership — the browser flow grants both.
+                  </p>
+                </Step>
+                <Step number={3} title="Check it can actually see the repo">
+                  <CommandBlock
+                    command="gh api repos/nestoca/fe-shared --jq .full_name"
+                    description="Should print: nestoca/fe-shared"
+                  />
+                </Step>
+              </div>
+            </div>
+
+            <Separator />
+
+            <div>
+              <h3 className="mb-3 font-mono text-lg font-medium tracking-tight">Claude Desktop</h3>
+              <div className="space-y-4">
+                <Step number={1} title="Add the GitHub connector">
+                  <p className="text-sm text-muted-foreground">
+                    Settings → Connectors → GitHub → connect, and authorise it in the browser window that opens.
+                  </p>
+                </Step>
+                <Step number={2} title="Grant it the nestoca organisation">
+                  <p className="text-sm text-muted-foreground">
+                    This is the step that gets missed. On the GitHub authorisation screen there&apos;s a list of organisations — <strong className="text-foreground">nestoca</strong> needs to be granted, not just your personal account. If it shows <em>Request</em> instead of <em>Grant</em>, a GitHub org owner has to approve it before you can continue.
+                  </p>
+                </Step>
+                <Step number={3} title="Check it worked">
+                  <p className="text-sm text-muted-foreground">
+                    Ask Claude:{" "}
+                    <em>&ldquo;read packages/ui/src/components/chip/chip.tsx from nestoca/fe-shared&rdquo;</em>. If it comes back with the file, you&apos;re set.
+                  </p>
+                </Step>
+              </div>
+            </div>
+          </div>
+
+          <Callout title="If it says it can't reach the repo">
+            <p>
+              An error mentioning <strong className="text-foreground">404</strong> means no access, not a typo. GitHub hides private repos from anyone who isn&apos;t allowed to see them, so &ldquo;not found&rdquo; and &ldquo;not permitted&rdquo; look identical from outside. A <strong className="text-foreground">403</strong> usually means the connector is there but wasn&apos;t granted the nestoca org.
+            </p>
+            <p className="mt-2">
+              Either way, first check you can open{" "}
+              <a href="https://github.com/nestoca/fe-shared" target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline">
+                github.com/nestoca/fe-shared
+              </a>{" "}
+              in a browser. If you can&apos;t, it&apos;s an org access request, not a setup problem — ask in Slack.
+            </p>
+          </Callout>
+
+          <Callout title="You can carry on without it">
+            <p>
+              The skill tells you up front if it can&apos;t reach the repo, then offers two ways forward: paste the component&apos;s source yourself, or work from the design alone. If you go design-only it drops the sections that depend on reading code, and records in the document that the implementation wasn&apos;t checked — so nobody mistakes silence for verification.
+            </p>
+          </Callout>
         </Section>
 
         <Separator />
