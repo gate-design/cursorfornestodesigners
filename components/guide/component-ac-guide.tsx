@@ -67,7 +67,7 @@ function Callout({ title, children }: { title: string; children: ReactNode }) {
 
 const STARTER_PROMPT = `/component-ac
 
-Component: <name> — new / existing v1 / existing v2
+Component: <name> — new, or an update to one that already ships
 Figma: <link with node-id>
 Accessibility spec: <link, or none>
 Decisions already made:
@@ -75,14 +75,14 @@ Decisions already made:
 
 const EXAMPLE_SIMPLE = `/component-ac
 
-Component: Chip — existing v1
+Component: Chip — existing, this is an update
 Figma: https://www.figma.com/design/CHACynbUiJMgOrwgNWdsoz/branch/0TIb0xpdr3g3AqM1DDFK2n/Nest-UI-Kit?node-id=420-1191
 Accessibility spec: none
 Decisions already made: none`
 
 const EXAMPLE_RICH = `/component-ac
 
-Component: Table — existing v2
+Component: Table — existing, this is an update
 Figma: https://www.figma.com/design/CHACynbUiJMgOrwgNWdsoz/branch/TilWBI6tRUxOycqa2lIcpW/Nest-UI-Kit?node-id=73671-42091
 Accessibility spec: https://nestoca.atlassian.net/wiki/spaces/PD/pages/5276565729/A11Y+MO+BB+Table+v2
 Decisions already made:
@@ -320,7 +320,7 @@ export function ComponentAcGuide() {
                 <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">node-id=</code> in it, it&apos;s the wrong link.
               </li>
               <li>
-                <strong className="text-foreground">The component name, and whether it exists.</strong> New, existing v1, or existing v2. If you&apos;re not sure, say so — it can check.
+                <strong className="text-foreground">The component name, and whether it&apos;s new or an update.</strong> That&apos;s all — you don&apos;t need to know where it lives in the codebase. If you&apos;re not sure whether it already ships, say so and it will check.
               </li>
               <li>
                 <strong className="text-foreground">The accessibility spec</strong>, if the component has one. A link, or <em>none</em>.
