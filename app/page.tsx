@@ -27,8 +27,46 @@ const tabs: {
   { id: "component-ac", label: "Component ACs", icon: ListChecks },
 ]
 
+const TAB_IDS = tabs.map((t) => t.id) as string[]
+
+/**
+ * The tab named by the URL hash, or null.
+ * Returns null for in-page anchors like `#ac-install` so the TOC links inside a
+ * guide keep working — an unrecognised hash must leave the current tab alone.
+ */
+function tabFromHash(): GuideTab | null {
+  if (typeof window === "undefined") return null
+  const hash = window.location.hash.replace(/^#/, "")
+  return TAB_IDS.includes(hash) ? (hash as GuideTab) : null
+}
+
 export default function Page() {
   const [tab, setTab] = React.useState<GuideTab>("cursor")
+
+  // Deep links (`…/#component-ac`) and back/forward. The hash isn't readable
+  // during a static export, so this runs after mount.
+  React.useEffect(() => {
+    const applyHash = () => {
+      const fromHash = tabFromHash()
+      if (fromHash) setTab(fromHash)
+    }
+    applyHash()
+    window.addEventListener("hashchange", applyHash)
+    window.addEventListener("popstate", applyHash)
+    return () => {
+      window.removeEventListener("hashchange", applyHash)
+      window.removeEventListener("popstate", applyHash)
+    }
+  }, [])
+
+  const selectTab = React.useCallback((id: GuideTab) => {
+    setTab(id)
+    if (window.location.hash.replace(/^#/, "") !== id) {
+      // pushState rather than assigning location.hash: no scroll jump, and it
+      // doesn't re-fire hashchange for a tab we've already switched to.
+      window.history.pushState(null, "", `#${id}`)
+    }
+  }, [])
 
   return (
     <div className="min-h-screen bg-background">
@@ -59,7 +97,7 @@ export default function Page() {
                       "justify-center gap-2 md:justify-start",
                       "min-h-10 md:flex-none"
                     )}
-                    onClick={() => setTab(id)}
+                    onClick={() => selectTab(id)}
                     aria-current={isActive ? "page" : undefined}
                   >
                     <Icon className="h-4 w-4 shrink-0" aria-hidden />
