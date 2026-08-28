@@ -180,11 +180,24 @@ export function ComponentAcGuide() {
               <h3 className="mb-3 font-mono text-lg font-medium tracking-tight">In Claude Desktop — already there</h3>
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground">
-                  It&apos;s published to everyone at nesto, so you don&apos;t download or upload anything. Start a chat and type{" "}
-                  <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">/component-ac</code>. If it doesn&apos;t come up, check Settings → Capabilities → Skills and make sure it&apos;s switched on — then ask Gate if it still isn&apos;t showing.
+                  It&apos;s published to everyone at nesto, so you don&apos;t download or upload anything.
+                </p>
+                <Callout title="You have to be in Code mode">
+                  <p>
+                    Switch the mode picker to <strong className="text-foreground">Code</strong> before you start.{" "}
+                    <strong className="text-foreground">Chat and Cowork will not run this skill</strong> — they don&apos;t have the tools it needs to read Figma and the repo.
+                  </p>
+                  <p className="mt-2">
+                    This is the first thing to check if{" "}
+                    <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">/component-ac</code> doesn&apos;t appear, or appears and then does nothing useful. It isn&apos;t an install problem.
+                  </p>
+                </Callout>
+                <p className="text-sm text-muted-foreground">
+                  In Code mode, type{" "}
+                  <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">/component-ac</code>. If it still doesn&apos;t come up, check Settings → Capabilities → Skills that it&apos;s switched on — then ask Gate.
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  You do need the <strong className="text-foreground">Figma connector</strong> for it to read your design file. Settings → Connectors, if it isn&apos;t there already.
+                  You also need the <strong className="text-foreground">Figma connector</strong> for it to read your design file. Settings → Connectors, if it isn&apos;t there already.
                 </p>
                 <Callout title="Still check your GitHub access">
                   <p>
