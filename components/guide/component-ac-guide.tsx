@@ -121,7 +121,7 @@ export function ComponentAcGuide() {
             What it does
           </a>
           <a href="#ac-install" className="block text-sm text-primary hover:underline">
-            Install it — Claude Code or Claude Desktop
+            Get the skill
           </a>
           <a href="#ac-access" className="block text-sm text-primary hover:underline">
             Give it access to fe-shared
@@ -172,19 +172,42 @@ export function ComponentAcGuide() {
 
         <Section
           id="ac-install"
-          title="Install it"
-          description="Same file either way. Pick whichever app you already use."
+          title="Get the skill"
+          description="Nothing to install if you use Claude Desktop"
         >
-          <DownloadCard
-            fileName="component-ac.zip"
-            description="The skill — one SKILL.md plus a short readme. 6 KB."
-            href={skillHref}
-          />
-
-          <div className="space-y-6 pt-2">
+          <div className="space-y-6">
             <div>
-              <h3 className="mb-3 font-mono text-lg font-medium tracking-tight">In Claude Code</h3>
+              <h3 className="mb-3 font-mono text-lg font-medium tracking-tight">In Claude Desktop — already there</h3>
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  It&apos;s published to everyone at nesto, so you don&apos;t download or upload anything. Start a chat and type{" "}
+                  <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">/component-ac</code>. If it doesn&apos;t come up, check Settings → Capabilities → Skills and make sure it&apos;s switched on — then ask Gate if it still isn&apos;t showing.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  You do need the <strong className="text-foreground">Figma connector</strong> for it to read your design file. Settings → Connectors, if it isn&apos;t there already.
+                </p>
+                <Callout title="Still check your GitHub access">
+                  <p>
+                    Being able to run the skill isn&apos;t the same as it being able to read the code. For an update it needs{" "}
+                    <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">nestoca/fe-shared</code>, which is private and connector-gated — that&apos;s the next section, and it&apos;s a one-time setup.
+                  </p>
+                </Callout>
+              </div>
+            </div>
+
+            <Separator />
+
+            <div>
+              <h3 className="mb-3 font-mono text-lg font-medium tracking-tight">In Claude Code — download it</h3>
               <div className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  The terminal reads skills from your own machine, so this one you install yourself.
+                </p>
+                <DownloadCard
+                  fileName="component-ac.zip"
+                  description="The skill — one SKILL.md plus a short readme. 7 KB."
+                  href={skillHref}
+                />
                 <Step number={1} title="Unzip it into your skills folder">
                   <CommandBlock
                     command="unzip ~/Downloads/component-ac.zip -d ~/.claude/skills/"
@@ -196,29 +219,10 @@ export function ComponentAcGuide() {
                 </Step>
               </div>
             </div>
-
-            <Separator />
-
-            <div>
-              <h3 className="mb-3 font-mono text-lg font-medium tracking-tight">In Claude Desktop</h3>
-              <div className="space-y-4">
-                <Step number={1} title="Upload the zip">
-                  <p className="text-sm text-muted-foreground">
-                    Settings → Capabilities → Skills → upload{" "}
-                    <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">component-ac.zip</code>. Don&apos;t unzip it first — Desktop wants the archive.
-                  </p>
-                </Step>
-                <Step number={2} title="Connect Figma">
-                  <p className="text-sm text-muted-foreground">
-                    The skill needs to read the design file. Add the Figma connector in Settings → Connectors if it isn&apos;t there already.
-                  </p>
-                </Step>
-              </div>
-            </div>
           </div>
 
           <CommentaryBubble name="Gate">
-            I&apos;ll post updates to the skill in Slack — re-download and replace your copy when I do. There&apos;s no auto-update, so if something on this page contradicts your local copy, this page is newer.
+            Desktop users get updates automatically — I republish the skill and everyone has it. If you&apos;re on Claude Code, I&apos;ll post in Slack when there&apos;s a new version and you re-download from here. If this page ever contradicts your local copy, this page is newer.
           </CommentaryBubble>
         </Section>
 
@@ -227,7 +231,7 @@ export function ComponentAcGuide() {
         <Section
           id="ac-access"
           title="Give it access to fe-shared"
-          description="Only needed for an existing component — a new one has nothing to compare against"
+          description="Everyone needs this, Desktop and terminal alike — but only for an existing component"
         >
           <p className="text-sm text-muted-foreground">
             To write an <strong className="text-foreground">update</strong>, the skill compares your design against what actually shipped, which means reading{" "}
