@@ -285,15 +285,10 @@ export function ComponentAcGuide() {
               <div className="space-y-4">
                 <Step number={1} title="Add the GitHub connector">
                   <p className="text-sm text-muted-foreground">
-                    Settings → Connectors → GitHub → connect, and authorise it in the browser window that opens.
+                    Settings → Connectors → GitHub → connect, and authorise it in the browser window that opens. The <strong className="text-foreground">nestoca</strong> organisation is already approved centrally, so there&apos;s nothing for you to grant.
                   </p>
                 </Step>
-                <Step number={2} title="Grant it the nestoca organisation">
-                  <p className="text-sm text-muted-foreground">
-                    This is the step that gets missed. On the GitHub authorisation screen there&apos;s a list of organisations — <strong className="text-foreground">nestoca</strong> needs to be granted, not just your personal account. If it shows <em>Request</em> instead of <em>Grant</em>, a GitHub org owner has to approve it before you can continue.
-                  </p>
-                </Step>
-                <Step number={3} title="Check it worked">
+                <Step number={2} title="Check it worked">
                   <p className="text-sm text-muted-foreground">
                     Ask Claude:{" "}
                     <em>&ldquo;read packages/ui/src/components/chip/chip.tsx from nestoca/fe-shared&rdquo;</em>. If it comes back with the file, you&apos;re set.
@@ -305,14 +300,22 @@ export function ComponentAcGuide() {
 
           <Callout title="If it says it can't reach the repo">
             <p>
-              An error mentioning <strong className="text-foreground">404</strong> means no access, not a typo. GitHub hides private repos from anyone who isn&apos;t allowed to see them, so &ldquo;not found&rdquo; and &ldquo;not permitted&rdquo; look identical from outside. A <strong className="text-foreground">403</strong> usually means the connector is there but wasn&apos;t granted the nestoca org.
+              An error mentioning <strong className="text-foreground">404</strong> means no access, not a typo — GitHub hides private repos, so &ldquo;not found&rdquo; and &ldquo;not permitted&rdquo; look identical from outside. Two things to check, in order:
             </p>
+            <ul className="ml-4 mt-2 list-disc space-y-1">
+              <li>
+                You can open{" "}
+                <a href="https://github.com/nestoca/fe-shared" target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline">
+                  github.com/nestoca/fe-shared
+                </a>{" "}
+                in a browser while signed in. If you can&apos;t, your GitHub account isn&apos;t in the nesto org yet.
+              </li>
+              <li>
+                In the terminal, <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">gh auth status</code> shows the account you expect. It&apos;s easy to be logged in as a personal account rather than the one with nesto access.
+              </li>
+            </ul>
             <p className="mt-2">
-              Either way, first check you can open{" "}
-              <a href="https://github.com/nestoca/fe-shared" target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline">
-                github.com/nestoca/fe-shared
-              </a>{" "}
-              in a browser. If you can&apos;t, it&apos;s an org access request, not a setup problem — ask in Slack.
+              Beyond that, don&apos;t try to fix permissions yourself — org access is managed centrally. Ask in Slack.
             </p>
           </Callout>
 
