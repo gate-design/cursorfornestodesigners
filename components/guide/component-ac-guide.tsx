@@ -71,14 +71,16 @@ Component: <name> — new, or an update to one that already ships
 Figma: <link with node-id>
 Accessibility spec: <link, or none>
 Decisions already made:
-- <one line each, or none>`
+- <one line each, or none>
+Jira ticket: <link, or none — I'll write the AC into it>`
 
 const EXAMPLE_SIMPLE = `/component-ac
 
 Component: Chip — existing, this is an update
 Figma: https://www.figma.com/design/CHACynbUiJMgOrwgNWdsoz/branch/0TIb0xpdr3g3AqM1DDFK2n/Nest-UI-Kit?node-id=420-1191
 Accessibility spec: none
-Decisions already made: none`
+Decisions already made: none
+Jira ticket: https://nestoca.atlassian.net/browse/UXUI-1234`
 
 const EXAMPLE_RICH = `/component-ac
 
@@ -89,7 +91,8 @@ Decisions already made:
 - Whole-row click is decided per table, not per row
 - A row either navigates or expands, never both
 - Density is being removed; one row height
-- Copy says "results", never "entries"`
+- Copy says "results", never "entries"
+Jira ticket: https://nestoca.atlassian.net/browse/UXUI-1412`
 
 const EXAMPLE_NEW = `/component-ac
 
@@ -98,7 +101,8 @@ Figma: https://www.figma.com/design/.../Nest-UI-Kit?node-id=1234-5678
 Accessibility spec: none
 Decisions already made:
 - Replaces the tab-styled radio group on the Documents screen
-- Max four segments; longer lists stay a Select`
+- Max four segments; longer lists stay a Select
+Jira ticket: none — not filed yet`
 
 export function ComponentAcGuide() {
   const skillHref = withBasePath("/skills/component-ac.zip")
@@ -108,7 +112,7 @@ export function ComponentAcGuide() {
       <div className="mb-12 space-y-4 text-center">
         <h1 className="font-mono text-4xl font-bold tracking-tight">Component ACs</h1>
         <p className="text-lg text-muted-foreground">
-          A skill that turns a Figma component into acceptance criteria an engineer can actually groom — no implementation details, no measurements, no invented rules.
+          A skill that turns a Figma component into acceptance criteria an engineer can actually groom, and files them into your Jira ticket — no implementation details, no measurements, no invented rules.
         </p>
       </div>
 
@@ -127,7 +131,7 @@ export function ComponentAcGuide() {
             Give it access to fe-shared
           </a>
           <a href="#ac-gather" className="block text-sm text-primary hover:underline">
-            Gather four things
+            Gather five things
           </a>
           <a href="#ac-use" className="block text-sm text-primary hover:underline">
             Use it
@@ -142,7 +146,7 @@ export function ComponentAcGuide() {
         <Section id="ac-why" title="What it does">
           <p className="text-sm text-muted-foreground">
             You point it at a Figma component. It reads the design, reads the current implementation in{" "}
-            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">nestoca/fe-shared</code>, and writes a markdown document you paste straight into a Jira description.
+            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">nestoca/fe-shared</code>, and writes the acceptance criteria straight into your Jira ticket. You don&apos;t copy or paste anything.
           </p>
           <p className="text-sm text-muted-foreground">
             The rules it follows came from front-end feedback on a real hand-off: state the expected outcome, leave the <em>how</em> to engineering, and hand back the decisions that aren&apos;t design&apos;s to make. The full reasoning lives on{" "}
@@ -330,7 +334,7 @@ export function ComponentAcGuide() {
 
         <Section
           id="ac-gather"
-          title="Gather four things"
+          title="Gather five things"
           description="It will ask for anything you leave out, but having them ready makes it one round trip"
         >
           <div className="space-y-4 text-sm text-muted-foreground">
@@ -347,6 +351,9 @@ export function ComponentAcGuide() {
               </li>
               <li>
                 <strong className="text-foreground">Anything already decided.</strong> Rulings from a review, a Slack thread, a call with engineering.
+              </li>
+              <li>
+                <strong className="text-foreground">The Jira ticket.</strong> Paste the link and the AC gets written into it for you. No ticket yet? Say <em>none</em> and you&apos;ll get a markdown file instead.
               </li>
             </ol>
           </div>
@@ -396,8 +403,17 @@ export function ComponentAcGuide() {
 
         <Section id="ac-back" title="What comes back">
           <p className="text-sm text-muted-foreground">
-            A markdown document you can paste straight into a Jira description. It describes <strong className="text-foreground">behaviour</strong> — no sizes, no spacing, no colours, because the developer reads those from Figma.
+            The acceptance criteria, written into your ticket&apos;s description. They describe <strong className="text-foreground">behaviour</strong> — no sizes, no spacing, no colours, because the developer reads those from Figma.
           </p>
+
+          <Callout title="It won't overwrite anything">
+            <p>
+              If the ticket description already has content, the skill shows you what&apos;s there and asks before touching it — replace, add below, or post as a comment. The <em>Appendix</em> always goes in a comment rather than the description, so the ticket stays groomable.
+            </p>
+            <p className="mt-2">
+              It only ever edits the description. Summary, status, assignee and the rest are left alone.
+            </p>
+          </Callout>
 
           <Callout title="You don't need to reread it line by line. Check one thing.">
             <p>
