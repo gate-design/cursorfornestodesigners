@@ -3,7 +3,7 @@
 //   node scripts/capture-token-swap-shots.mjs public/token-swap
 //
 // Needs: the Token swap tool running on localhost:6006 (yarn workspace doc storybook:tokens),
-// a local review branch design/button-mapping for the "Changes on…" shots, and fe-shared's
+// a local review branch style/tokens-button-mapping for the "Changes on…" shots, and fe-shared's
 // installed Playwright. Env: FE_SHARED (default ~/fe-shared), CHROMIUM (optional browser path).
 // Uses a fresh headless browser profile, so it never touches anyone's saved session.
 // Fills the Save and PR forms for the pictures but never submits them.
@@ -19,7 +19,7 @@ const OUT = process.argv[2];
 fs.mkdirSync(OUT, { recursive: true });
 const SB = "http://localhost:6006";
 const STORY = "ui-components-forms-button--brand-variants";
-const REVIEW = "design/button-mapping";
+const REVIEW = process.env.REVIEW || "style/tokens-button-mapping";
 
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const context = await browser.newContext({ viewport: { width: 1280, height: 1000 }, deviceScaleFactor: 2 });
@@ -140,15 +140,16 @@ await shot("swapped-row.png", await box(page.locator('button[aria-label^="button
 // ── 5. Session bar ─────────────────────────────────────────────────────────────────────────
 await shot("session-bar.png", await ancestorBox(page.getByText(/^1 unsaved change$/), "(el) => getComputedStyle(el).position === 'sticky'"));
 
-// ── 6. Tokens without a live preview (another component) ───────────────────────────────────
-await page.getByLabel(/Other component/).selectOption("chip");
+// ── 6. The story's token sets, then tokens without a live preview (another set) ────────────
+await shot("story-sets.png", await ancestorBox(page.getByText("Token sets for this story"), "(el) => el.tagName === 'DIV'"));
+await page.getByLabel(/^Browse/).selectOption("chip");
 const chipHeading = page.getByRole("heading", { name: /^chip · / });
 await chipHeading.waitFor();
 const chipRows = chipHeading.locator("xpath=following-sibling::ul[1]/li");
 const chipBoxes = [await box(chipHeading)];
 for (let i = 0; i < 3; i++) chipBoxes.push(await chipRows.nth(i).boundingBox());
 await shot("no-live-preview.png", union(chipBoxes));
-await page.getByLabel(/Other component/).selectOption("");
+await page.getByLabel(/^Browse/).selectOption("");
 
 // ── 7. Save for review form (filled, not submitted) ────────────────────────────────────────
 await page.getByRole("button", { name: /^Save for review/ }).click();
@@ -159,7 +160,47 @@ if ((await inputs.count()) > 1) await inputs.nth(1).fill("Button colours for the
 await page.waitForTimeout(300);
 await shot("save-form.png", await box(saveForm));
 
-// ── 8. On a review branch: changes list, review link, PR form ──────────────────────────────
+// ── 8. Connect parts, on the Checkbox story ────────────────────────────────────────────────
+{
+  const c = await context.newPage();
+  const cshot = async (name, clip) => {
+    await c.screenshot({ path: path.join(OUT, name), clip });
+    saved.push(name);
+  };
+  await c.goto(`${SB}/?path=/story/ui-components-forms-checkbox--states&addonPanel=token-swap/panel`);
+  await tallPanel(c);
+  await c.getByRole("button", { name: "Connect parts" }).click();
+  await c.waitForTimeout(500);
+  await cshot("connect-switch.png", union([await c.getByRole("group", { name: "View" }).boundingBox()], 8));
+  const cpv = c.frameLocator("#storybook-preview-iframe");
+  const target = cpv.locator("#storybook-root input[type=checkbox]:not(:checked):not(:disabled)").first();
+  await target.hover();
+  await c.waitForTimeout(400);
+  await cshot("connect-hover.png", union([await target.locator("xpath=..").boundingBox()], 30));
+  await target.click();
+  await c.waitForTimeout(900);
+  const partBar = c.locator(".token-swap-panel strong", { hasText: "Part:" }).locator("xpath=..");
+  const sections = c.locator(".token-swap-panel section").filter({ has: c.locator("h3") });
+  await partBar.evaluate((el) => el.scrollIntoView({ block: "start" }));
+  const top = [await partBar.boundingBox()];
+  for (let i = 0; i < 3; i++) top.push(await sections.nth(i).boundingBox());
+  await cshot("connect-rows.png", union(top));
+  const hoverFill = c.locator('button[aria-label^="checkbox · Hover · Fill: not connected"]');
+  await hoverFill.click();
+  await c.getByLabel("Filter component tokens").fill("background");
+  await c.waitForTimeout(300);
+  const hoverRow = hoverFill.locator("xpath=ancestor::li[1]");
+  await hoverRow.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  await cshot("connect-picker.png", await hoverRow.boundingBox());
+  await hoverRow.locator("li > button", { hasText: /^checkbox-radio \/ background \/ intermediate/ }).first().click();
+  await c.waitForTimeout(700);
+  const connected = c.locator('button[aria-label^="checkbox · Hover · Fill: checkbox-radio"]').locator("xpath=ancestor::li[1]");
+  await connected.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  await cshot("connect-connected.png", await connected.boundingBox());
+  await c.close();
+}
+
+// ── 9. On a review branch: changes list, review link, PR form ──────────────────────────────
 const fresh = await context.newPage();
 await page.close();
 const p = fresh;

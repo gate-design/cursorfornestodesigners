@@ -144,6 +144,7 @@ export function TokenSwapGuide() {
             ["ts-setup", "Let Claude set it up"],
             ["ts-start", "Start and stop it"],
             ["ts-map", "Map tokens to a component"],
+            ["ts-connect", "Connect a component to its tokens"],
             ["ts-share", "Share it for review"],
             ["ts-review", "Review a colleague's work"],
             ["ts-merge", "When you agree"],
@@ -265,6 +266,13 @@ export function TokenSwapGuide() {
             <p className="text-sm text-muted-foreground">
               <Ui>Brand</Ui> and <Ui>Light / Dark</Ui> recolour everything, so you can check one change across tenants before committing to it. Untick <Ui>Preview rebrand tokens</Ui> to compare with what ships today.
             </p>
+            <Shot
+              src="story-sets.png"
+              alt="The Token sets for this story bar: a button chip with a remove cross, a + link a set menu, and a Browse menu"
+            />
+            <p className="text-sm text-muted-foreground">
+              <Ui>Token sets for this story</Ui> says which sets the story shows. A story can have several — Radio Group shows <Code>checkbox-radio</Code> and <Code>label</Code>. Use <Ui>×</Ui> and <Ui>+ link a set…</Ui> to change them; that&apos;s saved and reviewed like a swap. <Ui>Browse</Ui> opens any other set.
+            </p>
           </Step>
           <Step number={3} title="Open a token">
             <Shot
@@ -309,13 +317,63 @@ export function TokenSwapGuide() {
           </Step>
           <Callout title="“no live preview”">
             <p>
-              That component doesn&apos;t read its tokens yet, so the swap won&apos;t show — but it&apos;s still saved and still goes to review. Today Button, TextInput, Banner and Tooltip preview live; more get added as they&apos;re wired up.
-            </p>
-            <p className="mt-2">
-              On a story with no tokens linked, use <Ui>Other component</Ui> to open any component&apos;s tokens.
+              No part of the component is connected to that token yet, so a swap won&apos;t show — but it&apos;s still saved and still goes to review. Connect it yourself, next section.
             </p>
           </Callout>
           <Shot src="no-live-preview.png" alt="Token rows marked no live preview on the right" />
+        </Section>
+
+        <Separator />
+
+        <Section
+          id="ts-connect"
+          title="Connect a component to its tokens"
+          description="So a token previews live — and so a split set can be remapped"
+        >
+          <p className="text-sm text-muted-foreground">
+            Our coded components still use the old tokens. A <Ui>connection</Ui> tells the preview which token paints which part of a component, in which state. Checkbox, Radio, Button, TextInput, Banner and Tooltip are connected already; anything else, you connect here.
+          </p>
+          <Step number={1} title="Switch to Connect parts">
+            <Shot src="connect-switch.png" alt="The Map tokens and Connect parts switch, with Connect parts selected" />
+          </Step>
+          <Step number={2} title="Click a part of the component">
+            <Shot
+              src="connect-hover.png"
+              alt="A checkbox in the preview outlined in yellow, with a label reading checkbox"
+              caption="Parts are outlined as you hover. Clicking picks the part; it doesn't tick the box."
+            />
+          </Step>
+          <Step number={3} title="See every state its code styles">
+            <Shot
+              src="connect-rows.png"
+              alt="The picked part, checkbox, with its states: Default, Checked plus Indeterminate, Checked plus Indeterminate plus Disabled. Each lists Border and Fill, the variable the code uses today, and the connected token"
+            />
+            <p className="text-sm text-muted-foreground">
+              Each state the component&apos;s CSS styles gets a row — <em>Default, Hover, Focus, Checked, Disabled</em>, and combinations — with what it paints (<em>Fill, Border, Text, Focus ring</em>) and the variable the code uses today. Connected rows show their token.
+            </p>
+          </Step>
+          <Step number={4} title="Connect a row to a token">
+            <Shot
+              src="connect-picker.png"
+              alt="The Hover Fill row's picker, filtered to background, with checkbox-radio tokens listed first and marked this story"
+            />
+            <p className="text-sm text-muted-foreground">
+              Click <Ui>Connect…</Ui>. The story&apos;s own sets are listed first. Pick one and the preview updates straight away.
+            </p>
+            <Shot
+              src="connect-connected.png"
+              alt="The Hover Fill row now connected to checkbox-radio / background / intermediate, with Disconnect and Revert buttons"
+            />
+            <p className="text-sm text-muted-foreground">
+              <Ui>Disconnect</Ui> removes a connection; <Ui>Revert</Ui> undoes your change. Connections save and go to review with your swaps.
+            </p>
+          </Step>
+          <Callout title="When a set is split or renamed">
+            Say <Code>checkbox-radio</Code> becomes <Code>checkbox</Code> and <Code>radio</Code> in Tokens Studio. Connections to tokens that no longer exist are flagged — <em>token removed, choose another</em>. Re-link the story to its new set, pick the part, and connect it to the new tokens.
+          </Callout>
+          <Callout title="What a connection can't fix">
+            A connection recolours what the component&apos;s CSS already paints. If something is drawn another way — the checkbox tick is a fixed white image — it needs front-end, and the token&apos;s row keeps saying <em>no live preview</em>.
+          </Callout>
         </Section>
 
         <Separator />
@@ -359,7 +417,7 @@ export function TokenSwapGuide() {
               alt="The Changes on style/tokens-button-mapping list showing each component token that was re-pointed, from and to"
             />
             <p className="text-sm text-muted-foreground">
-              <Ui>Changes on style/tokens-&lt;name&gt;</Ui> lists every component token they re-pointed, across all components. Open each component and look at it in the brands and modes that matter.
+              <Ui>Changes on style/tokens-&lt;name&gt;</Ui> lists every component token they re-pointed and every connection they changed, across all components. Open each component and look at it in the brands and modes that matter.
             </p>
           </Step>
           <Step number={3} title="Reply">
