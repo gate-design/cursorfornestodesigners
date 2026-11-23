@@ -11,19 +11,19 @@ import { Separator } from "@/components/ui/separator"
 import {
   CommentaryBubble,
   CopyButton,
-  MissingInfoBadge,
   Section,
   Step,
 } from "@/components/guide/guide-ui"
 import { withBasePath } from "@/lib/base-path"
 
 const REBRAND_BRANCH = "style/figma-rebrand"
-const TOOL_BRANCH = "design/token-swap-tool"
+const TOOL_BRANCH = "feat/token-swap-tool"
+const TOOL_PR_URL = "https://github.com/nestoca/fe-shared/pull/1866"
 const REPO_URL = "https://github.com/nestoca/fe-shared"
 
 function Callout({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="rounded-none border-l-2 border-primary bg-muted/30 p-4">
+    <div className="rounded-lg border-l-2 border-primary bg-muted/30 p-4">
       <p className="text-sm font-semibold text-foreground">{title}</p>
       <div className="mt-1 text-sm leading-relaxed text-muted-foreground">{children}</div>
     </div>
@@ -40,7 +40,7 @@ function Ui({ children }: { children: ReactNode }) {
 
 function PromptBlock({ label, prompt }: { label: string; prompt: string }) {
   return (
-    <div className="space-y-2 rounded-none border border-primary/25 bg-primary/5 p-4">
+    <div className="space-y-2 rounded-lg border border-primary/25 bg-primary/5 p-4">
       <div className="flex items-start justify-between gap-3">
         <p className="text-[11px] font-semibold tracking-wide text-primary [font-variant:small-caps]">
           {label}
@@ -58,7 +58,7 @@ function PromptBlock({ label, prompt }: { label: string; prompt: string }) {
 function Shot({ src, alt, caption }: { src: string; alt: string; caption?: ReactNode }) {
   return (
     <figure className="space-y-2">
-      <div className="overflow-x-auto rounded-none border bg-background">
+      <div className="overflow-x-auto rounded-lg border bg-background">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={withBasePath(`/token-swap/${src}`)} alt={alt} className="block h-auto max-w-full" />
       </div>
@@ -88,7 +88,7 @@ const LOOP = [
   {
     where: "Token swap tool",
     what: "Which semantic token each component token points at, checked live on the real components",
-    lands: "a review branch, design/<name>",
+    lands: "a review branch, style/tokens-<name>",
   },
   {
     where: "A colleague",
@@ -164,7 +164,7 @@ export function TokenSwapGuide() {
         <Section id="ts-loop" title="How the pieces fit" description="Everything is shared through branches — the same ones Tokens Studio already uses">
           <ol className="space-y-3">
             {LOOP.map((step, i) => (
-              <li key={step.where} className="flex gap-3 rounded-none border bg-muted/20 p-3">
+              <li key={step.where} className="flex gap-3 rounded-lg border bg-muted/20 p-3">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-primary font-mono text-xs font-semibold text-primary-foreground">
                   {i + 1}
                 </span>
@@ -193,7 +193,7 @@ export function TokenSwapGuide() {
           <Step number={2} title="Paste this">
             <PromptBlock label="setup prompt" prompt={SETUP_PROMPT} />
             <p className="text-sm text-muted-foreground">
-              The tool lives on its own branch for now. <MissingInfoBadge>not on GitHub yet</MissingInfoBadge>
+              The tool lives on its own branch until front-end merges it (<a href={TOOL_PR_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline">draft PR #1866</a>).
             </p>
           </Step>
           <Step number={3} title="Step in when it asks">
@@ -308,10 +308,10 @@ export function TokenSwapGuide() {
           <Step number={1} title="Save for review">
             <Shot
               src="save-form.png"
-              alt="The Save for review form: a review branch name, design/button-mapping, a description, and the Save and push button"
+              alt="The Save for review form: a review branch name, style/tokens-button-mapping, a description, and the Save and push button"
             />
             <p className="text-sm text-muted-foreground">
-              Click <Ui>Save for review…</Ui>, name the branch after what you changed — <Code>button-mapping</Code>, <Code>dark-mode-borders</Code> — add a one-line description, then <Ui>Save and push</Ui>. It saves to <Code>design/&lt;name&gt;</Code> on GitHub. No pull request, nothing for front-end yet. Saving takes a minute or two.
+              Click <Ui>Save for review…</Ui>, name the branch after what you changed — <Code>button-mapping</Code>, <Code>dark-mode-borders</Code> — add a one-line description, then <Ui>Save and push</Ui>. It saves to <Code>style/tokens-&lt;name&gt;</Code> on GitHub. No pull request, nothing for front-end yet. Saving takes a minute or two.
             </p>
             <p className="text-sm text-muted-foreground">
               The panel then switches to that branch, so anything else you change adds to the same review. One topic per branch keeps reviews short.
@@ -340,10 +340,10 @@ export function TokenSwapGuide() {
           <Step number={2} title="See what changed">
             <Shot
               src="changes-list.png"
-              alt="The Changes on design/button-mapping list showing each component token that was re-pointed, from and to"
+              alt="The Changes on style/tokens-button-mapping list showing each component token that was re-pointed, from and to"
             />
             <p className="text-sm text-muted-foreground">
-              <Ui>Changes on design/&lt;name&gt;</Ui> lists every component token they re-pointed, across all components. Open each component and look at it in the brands and modes that matter.
+              <Ui>Changes on style/tokens-&lt;name&gt;</Ui> lists every component token they re-pointed, across all components. Open each component and look at it in the brands and modes that matter.
             </p>
           </Step>
           <Step number={3} title="Reply">
