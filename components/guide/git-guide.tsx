@@ -27,7 +27,7 @@ function AskCursor({
   children: ReactNode
 }) {
   return (
-    <div className="space-y-2 rounded-none border border-primary/25 bg-primary/5 p-4">
+    <div className="space-y-2 rounded-lg border border-primary/25 bg-primary/5 p-4">
       <p className="text-[11px] font-semibold tracking-wide text-primary [font-variant:small-caps]">
         Type this in Cursor (chat or Agent)
       </p>
@@ -44,7 +44,7 @@ function AskCursor({
 /** Optional: run these yourself to save chat tokens or learn what Cursor is doing. */
 function SameInTerminal({ children }: { children: ReactNode }) {
   return (
-    <div className="mt-3 space-y-2 rounded-none border border-border/80 bg-muted/35 p-3">
+    <div className="mt-3 space-y-2 rounded-lg border border-border/80 bg-muted/35 p-3">
       <p className="text-[11px] font-semibold tracking-wide text-muted-foreground [font-variant:small-caps]">
         Same thing in the terminal
       </p>
@@ -196,7 +196,7 @@ export function GitGuide() {
           title="Part 3: The loop — sync, branch, save, share"
           description="This is the rhythm you&apos;ll use over and over: get latest, work on your branch, save, upload, open a PR."
         >
-          <div className="rounded-none border border-primary/20 bg-primary/5 p-4">
+          <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
             <p className="text-sm font-semibold tracking-wide text-primary [font-variant:small-caps]">
               Goal
             </p>

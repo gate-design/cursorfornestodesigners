@@ -21,7 +21,7 @@ const CONFLUENCE_URL = "https://nestoca.atlassian.net/wiki/x/d4G9OgE"
 
 function PromptBlock({ label, prompt }: { label: string; prompt: string }) {
   return (
-    <div className="space-y-2 rounded-none border border-primary/25 bg-primary/5 p-4">
+    <div className="space-y-2 rounded-lg border border-primary/25 bg-primary/5 p-4">
       <div className="flex items-start justify-between gap-3">
         <p className="text-[11px] font-semibold tracking-wide text-primary [font-variant:small-caps]">
           {label}
@@ -48,7 +48,7 @@ function DownloadCard({
     <a
       href={href}
       download
-      className="block rounded-none border border-border bg-muted/30 p-4 transition hover:bg-muted/50"
+      className="block rounded-lg border border-border bg-muted/30 p-4 transition hover:bg-muted/50"
     >
       <p className="font-mono text-sm font-medium text-primary">↓ {fileName}</p>
       <p className="mt-1 text-xs text-muted-foreground">{description}</p>
@@ -58,7 +58,7 @@ function DownloadCard({
 
 function Callout({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="rounded-none border-l-2 border-primary bg-muted/30 p-4">
+    <div className="rounded-lg border-l-2 border-primary bg-muted/30 p-4">
       <p className="text-sm font-semibold text-foreground">{title}</p>
       <div className="mt-1 text-sm leading-relaxed text-muted-foreground">{children}</div>
     </div>

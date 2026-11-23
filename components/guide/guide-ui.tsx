@@ -36,7 +36,7 @@ export function CopyButton({ text, className }: { text: string; className?: stri
 export function CommandBlock({ command, description }: { command: string; description?: string }) {
   return (
     <div className="group relative">
-      <div className="flex items-center gap-2 rounded-none border bg-muted/50 p-3 font-mono text-sm">
+      <div className="flex items-center gap-2 rounded-md border bg-muted/50 p-3 font-mono text-sm">
         <code className="flex-1">{command}</code>
         <CopyButton text={command} />
       </div>
@@ -68,7 +68,7 @@ export function CommentaryBubble({ children, name = "You" }: { children: React.R
           </svg>
         )}
       </div>
-      <div className="flex-1 rounded-none border bg-muted/30 p-4">
+      <div className="flex-1 rounded-lg border bg-muted/30 p-4">
         <div className="mb-1 text-xs font-medium text-muted-foreground">{name}</div>
         <div className="text-sm leading-relaxed">{children}</div>
       </div>
@@ -112,7 +112,7 @@ export function Step({
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-3">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-none bg-primary font-mono text-sm font-semibold text-primary-foreground">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary font-mono text-sm font-semibold text-primary-foreground">
           {number}
         </div>
         <h3 className="font-mono text-lg font-medium tracking-tight">{title}</h3>

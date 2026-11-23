@@ -24,7 +24,7 @@ function AskClaudeCode({
   children: ReactNode
 }) {
   return (
-    <div className="space-y-2 rounded-none border border-primary/25 bg-primary/5 p-4">
+    <div className="space-y-2 rounded-lg border border-primary/25 bg-primary/5 p-4">
       <p className="text-[11px] font-semibold tracking-wide text-primary [font-variant:small-caps]">
         Type this in Claude Code (in the terminal, inside the cloned repo)
       </p>
@@ -51,7 +51,7 @@ function DownloadCard({
     <a
       href={href}
       download
-      className="block rounded-none border border-border bg-muted/30 p-4 transition hover:bg-muted/50"
+      className="block rounded-lg border border-border bg-muted/30 p-4 transition hover:bg-muted/50"
     >
       <p className="font-mono text-sm font-medium text-primary">↓ {fileName}</p>
       <p className="mt-1 text-xs text-muted-foreground">{description}</p>
