@@ -117,6 +117,22 @@ export function TokenSwapGuide() {
         </p>
       </div>
 
+      <figure className="mb-12 space-y-2">
+        <video
+          controls
+          playsInline
+          preload="none"
+          poster={withBasePath("/token-swap/walkthrough-poster.jpg")}
+          className="block w-full rounded-lg border bg-black"
+          aria-label="Token swap walkthrough, 2 minutes 32 seconds, narrated with captions"
+        >
+          <source src={withBasePath("/token-swap/walkthrough.mp4")} type="video/mp4" />
+        </video>
+        <figcaption className="text-xs text-muted-foreground">
+          The whole workflow in 2½ minutes, narrated, with captions. The steps below go through each part.
+        </figcaption>
+      </figure>
+
       <Card className="mb-12">
         <CardHeader>
           <CardTitle>Table of contents</CardTitle>
