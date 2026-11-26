@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { BookOpen, CirclesFour, GitBranch, ListChecks, Sparkle, Swatches, Tag } from "@phosphor-icons/react"
+import { BookOpen, CirclesFour, GitBranch, ListChecks, Notebook, Sparkle, Swatches, Tag } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { CursorGuide } from "@/components/guide/cursor-guide"
@@ -10,9 +10,10 @@ import { ClaudeDesignGuide } from "@/components/guide/claude-design-guide"
 import { ComponentsGuide } from "@/components/guide/components-guide"
 import { ComponentAcGuide } from "@/components/guide/component-ac-guide"
 import { TokenSwapGuide } from "@/components/guide/token-swap-guide"
+import { DesignMdGuide } from "@/components/guide/design-md-guide"
 import { PlaygroundPanel } from "@/components/guide/playground-panel"
 
-type GuideTab = "cursor" | "git" | "playground" | "claude" | "components" | "component-ac" | "token-swap"
+type GuideTab = "cursor" | "git" | "playground" | "claude" | "components" | "component-ac" | "token-swap" | "design-md"
 
 const tabs: {
   id: GuideTab
@@ -27,6 +28,7 @@ const tabs: {
   { id: "components", label: "Jira Components", icon: Tag },
   { id: "component-ac", label: "Component ACs", icon: ListChecks },
   { id: "token-swap", label: "Token swap", icon: Swatches },
+  { id: "design-md", label: "DESIGN.md", icon: Notebook },
 ]
 
 const TAB_IDS = tabs.map((t) => t.id) as string[]
@@ -124,6 +126,7 @@ export default function Page() {
           {tab === "components" && <ComponentsGuide />}
           {tab === "component-ac" && <ComponentAcGuide />}
           {tab === "token-swap" && <TokenSwapGuide />}
+          {tab === "design-md" && <DesignMdGuide />}
         </main>
       </div>
     </div>
