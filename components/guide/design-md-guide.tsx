@@ -15,6 +15,7 @@ import {
   Section,
   Step,
 } from "@/components/guide/guide-ui"
+import { withBasePath } from "@/lib/base-path"
 
 // The pack lives on a branch until its PR merges. When it does, set PACK_BRANCH to "master".
 const PACK_BRANCH = "docs/design-md-pack"
@@ -135,6 +136,22 @@ export function DesignMdGuide() {
           All of our design knowledge in a few markdown files, so anyone in the org (or any AI tool) can build a prototype that looks and behaves like nesto. And we, the designers, keep it true.
         </p>
       </div>
+
+      <figure className="mb-12 space-y-2">
+        <video
+          controls
+          playsInline
+          preload="none"
+          poster={withBasePath("/design-md/walkthrough-poster.jpg")}
+          className="block w-full rounded-lg border bg-black"
+          aria-label="DESIGN.md walkthrough, 3 minutes 20 seconds, narrated with captions"
+        >
+          <source src={withBasePath("/design-md/walkthrough.mp4")} type="video/mp4" />
+        </video>
+        <figcaption className="text-xs text-muted-foreground">
+          What&apos;s in the folder, how to prototype with it, and how we keep it true, in about 3 minutes. Narrated, with captions. The sections below go through each part.
+        </figcaption>
+      </figure>
 
       <Card className="mb-12">
         <CardHeader>
